@@ -9,8 +9,10 @@ import Socials from "@/components/Socials.astro";
 import { getSortedPosts } from "@/utils/getSortedPosts";
 import config from "../../astro-paper.config";
 
-const posts = await getCollection("blog");
-const sortedPosts = await getSortedPosts(posts);
+const rawPosts = await getCollection("posts");
+const posts = rawPosts.filter(post => Boolean(post?.data?.title));
+
+const sortedPosts = getSortedPosts(posts);
 const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 ---
@@ -40,10 +42,12 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
         <section id="featured" class="pb-6 pt-12">
           <h2 class="text-2xl font-semibold tracking-wide">Featured</h2>
           <ul>
-            {featuredPosts.map(({ data, id }) => (
+            {featuredPosts.map((post) => (
               <Card
-                href={`/posts/${id}/`}
-                frontmatter={data}
+                href={`/posts/${post.id}/`}
+                data={post.data}
+                id={post.id}
+                post={post}
                 secHeading={false}
               />
             ))}
@@ -58,11 +62,13 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
           <h2 class="text-2xl font-semibold tracking-wide">Recent Posts</h2>
           <ul>
             {recentPosts.map(
-              ({ data, id }, index) =>
+              (post, index) =>
                 index < config.posts.perIndex && (
                   <Card
-                    href={`/posts/${id}/`}
-                    frontmatter={data}
+                    href={`/posts/${post.id}/`}
+                    data={post.data}
+                    id={post.id}
+                    post={post}
                     secHeading={false}
                   />
                 )
