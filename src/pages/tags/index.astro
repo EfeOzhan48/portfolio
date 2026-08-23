@@ -4,7 +4,7 @@ import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
 import Tag from "@/components/Tag.astro";
-import getUniqueTags from "@/utils/getUniqueTags";
+import { getUniqueTags } from "@/utils/getUniqueTags";
 import config from "@/config";
 
 const posts = await getCollection("posts");
@@ -21,7 +21,11 @@ const tags = getUniqueTags(posts);
       All topics and technologies covered across devlogs:
     </p>
     <ul class="flex flex-wrap gap-3">
-      {tags.map(({ tag, tagName }) => <Tag tag={tag} tagName={tagName} size="lg" />)}
+      {
+        tags.map((tagItem: { tag: string; tagName: string }) => (
+          <Tag tag={tagItem.tag} tagName={tagItem.tagName} size="lg" />
+        ))
+      }
     </ul>
   </main>
   <Footer />
