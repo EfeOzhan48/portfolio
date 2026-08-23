@@ -1,6 +1,11 @@
 @plugin "@tailwindcss/typography";
 
 @layer base {
+  /* ===== Global Font Assignment ===== */
+  html, body {
+    font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace !important;
+  }
+
   /* ===== Override default Tailwind Typography styles ===== */
   .app-prose {
     @apply prose;
@@ -10,7 +15,7 @@
     h3,
     h4,
     th {
-      @apply text-foreground mb-3;
+      @apply text-foreground mb-3 font-semibold;
     }
 
     h3 {
@@ -27,8 +32,17 @@
       @apply text-foreground;
     }
 
+    /* Linkler: Normalde elektrik mavisi, hover durumunda neon mor */
     a {
-      @apply text-foreground hover:text-accent wrap-break-word decoration-dashed underline-offset-4 focus-visible:no-underline;
+      color: var(--accent);
+      text-decoration-line: underline;
+      text-decoration-style: dashed;
+      text-underline-offset: 4px;
+      transition: color 0.15s ease-in-out;
+    }
+
+    a:hover {
+      color: var(--accent-purple, #c084fc) !important;
     }
 
     ul {
@@ -120,7 +134,6 @@
   }
 
   /* Styles for Shiki transformers */
-  /* https://shiki.style/packages/transformers */
   .astro-code {
     .line.diff.add {
       @apply relative inline-block w-full bg-green-400/20 before:absolute before:-left-3 before:text-green-500 before:content-['+'];
