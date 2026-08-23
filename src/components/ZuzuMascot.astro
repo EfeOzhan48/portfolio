@@ -46,74 +46,72 @@
 </style>
 
 <script is:inline>
-  const container = document.getElementById("zuzu-container");
-  const cat = document.getElementById("zuzu-cat");
-  const bubble = document.getElementById("zuzu-bubble");
+  function initZuzu() {
+    const container = document.getElementById("zuzu-container");
+    const cat = document.getElementById("zuzu-cat");
+    const bubble = document.getElementById("zuzu-bubble");
 
-  let isFollowing = false;
-  let mouseX = window.innerWidth - 80;
-  let mouseY = window.innerHeight - 80;
-  let catX = mouseX;
-  let catY = mouseY;
-  let isWalking = false;
+    if (!container || !cat) return;
 
-  window.addEventListener("mousemove", function (e) {
-    mouseX = e.clientX;
-    mouseY = e.clientY;
-  });
+    let isFollowing = false;
+    let mouseX = window.innerWidth - 80;
+    let mouseY = window.innerHeight - 80;
+    let catX = mouseX;
+    let catY = mouseY;
+    let isWalking = false;
 
-  function followLoop() {
-    if (isFollowing && container && cat) {
-      // Mouse'a çok yapışmasın diye 120px güvenli mesafe sınırı
-      const targetX = mouseX - 40;
-      const targetY = mouseY - 40;
+    window.addEventListener("mousemove", function (e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
 
-      const dx = targetX - catX;
-      const dy = targetY - catY;
-      const distance = Math.hypot(dx, dy);
+    function followLoop() {
+      if (isFollowing && container && cat) {
+        const targetX = mouseX - 40;
+        const targetY = mouseY - 40;
 
-      if (distance > 120) {
-        catX += dx * 0.035; // Yumuşak ve sakin takip hızı
-        catY += dy * 0.035;
+        const dx = targetX - catX;
+        const dy = targetY - catY;
+        const distance = Math.hypot(dx, dy);
 
-        if (dx < -2) cat.classList.add("facing-left");
-        else if (dx > 2) cat.classList.remove("facing-left");
+        if (distance > 120) {
+          catX += dx * 0.035;
+          catY += dy * 0.035;
 
-        if (!isWalking) {
-          cat.classList.add("walking");
-          isWalking = true;
+          if (dx < -2) cat.classList.add("facing-left");
+          else if (dx > 2) cat.classList.remove("facing-left");
+
+          if (!isWalking) {
+            cat.classList.add("walking");
+            isWalking = true;
+          }
+        } else {
+          if (isWalking) {
+            cat.classList.remove("walking");
+            isWalking = false;
+          }
         }
-      } else {
-        if (isWalking) {
-          cat.classList.remove("walking");
-          isWalking = false;
-        }
+
+        container.style.left = catX + "px";
+        container.style.top = catY + "px";
+        container.style.bottom = "auto";
+        container.style.right = "auto";
       }
-
-      container.style.left = catX + "px";
-      container.style.top = catY + "px";
-      container.style.bottom = "auto";
-      container.style.right = "auto";
+      requestAnimationFrame(followLoop);
     }
+
     requestAnimationFrame(followLoop);
-  }
 
-  requestAnimationFrame(followLoop);
-
-  // Kediyi sevince (tıklayınca) modu aç/kapat
-  if (cat && bubble) {
     cat.addEventListener("click", function (e) {
       e.stopPropagation();
       isFollowing = !isFollowing;
 
       if (isFollowing) {
-        // Takip moduna geçerken konumu sabitle
         const rect = container.getBoundingClientRect();
         catX = rect.left;
         catY = rect.top;
         bubble.textContent = "Miyav! Peşindeyim 🐾";
       } else {
-        // Takibi bırakıp dinlenme modu
         cat.classList.remove("walking");
         isWalking = false;
         bubble.textContent = "Dinleniyorum... 💤";
@@ -124,5 +122,13 @@
         bubble.classList.add("opacity-0");
       }, 1600);
     });
+  }
+
+  // Hem ilk açılışta hem de Astro sayfa geçişlerinde çalıştır
+  document.addEventListener("astro:page-load", initZuzu);
+  if (document.readyState === "complete" || document.readyState === "interactive") {
+    initZuzu();
+  } else {
+    document.addEventListener("DOMContentLoaded", initZuzu);
   }
 </script>

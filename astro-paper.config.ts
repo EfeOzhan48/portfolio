@@ -5,7 +5,7 @@ export default defineAstroPaperConfig({
     url: "https://efeozhan.dev/",
     author: "Durmuş Efe Özhan",
     profile: "https://efeozhan.dev/",
-    description: "Kişisel portfolyo, projeler ve mühendislik/yazılım notları.",
+    description: "Selam! Ben Efe. Mühendislik, projelerim ve denemelerimi paylaştığım dijital günlüğüme hoş geldin.",
     title: "Efe Özhan",
     ogImage: "astropaper-og.jpg",
   },
