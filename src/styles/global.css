@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:ital,wght@0,300..800;1,300..800&display=swap');
 @import "./theme.css";
 @import "./typography.css";
 @import "rehype-callouts/theme/obsidian";
@@ -6,16 +7,30 @@
 @custom-variant dark (&:where([data-theme=dark], [data-theme=dark] *));
 
 @layer base {
+  *,
+  body,
+  html {
+    font-family: "JetBrains Mono", monospace !important;
+  }
+
   * {
     @apply border-border outline-accent/75;
     scrollbar-width: auto;
     scrollbar-color: var(--color-muted) transparent;
   }
+
   a,
   button,
   #main-content {
     @apply outline-accent outline-offset-1 focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-dashed;
   }
+
+  /* Link üzerine gelince mor ışıma */
+  a:hover {
+    color: var(--accent-purple, #c084fc);
+    transition: color 0.15s ease-in-out;
+  }
+
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
