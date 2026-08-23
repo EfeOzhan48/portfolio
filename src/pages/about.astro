@@ -7,17 +7,17 @@ import Footer from "@/components/Footer.astro";
 <Layout title="About Me | Durmuş Efe Özhan">
   <Header activeNav="about" />
   <main id="main-content" class="mx-auto w-full max-w-app px-4 pb-12 pt-8">
-    <h1 class="text-2xl font-semibold tracking-wide sm:text-3xl text-skin-accent">About Me</h1>
+    <h1 class="text-2xl font-semibold tracking-wide sm:text-3xl text-accent mb-6">About Me</h1>
     
-    <article id="article" class="about-content mx-auto mt-8 max-w-app">
+    <article id="article" class="about-content mx-auto max-w-app text-foreground">
       <p>
         Hey there! I'm <strong>Durmuş Efe Özhan</strong>.
       </p>
       <p>
-        I was born in Mersin on June 30, 2005, but I actually live in Muğla. After graduating from Muğla Gazi Anatolian High School in 2023, I started studying <strong>Computer Engineering at Samsun Ondokuz Mayıs University</strong> in 2024, and I'm currently continuing my journey here.
+        I was born in Mersin on June 30, 2005, but I actually live in Muğla. After graduating from <strong>Muğla Gazi Anadolu High School</strong> in 2023, I started studying <strong>Computer Engineering at Samsun Ondokuz Mayıs University</strong> in 2024, and I'm currently continuing my journey here.
       </p>
 
-      <hr class="my-6 border-dashed border-skin-line" />
+      <hr class="my-6 border-dashed border-border" />
 
       <h3>What Am I Working On?</h3>
       <p>
@@ -32,7 +32,7 @@ import Footer from "@/components/Footer.astro";
         <li><strong>University Clubs:</strong> Actively participating in student clubs and taking part in new projects.</li>
       </ul>
 
-      <hr class="my-6 border-dashed border-skin-line" />
+      <hr class="my-6 border-dashed border-border" />
 
       <h3>Beyond the Code: Interests & Hobbies</h3>
       <p>
@@ -46,7 +46,7 @@ import Footer from "@/components/Footer.astro";
         <li><strong>Short-Term Goal:</strong> Alongside software, I want to learn 3D modeling this year to get physical outputs, and dive into electronics to build more tangible, hands-on projects.</li>
       </ul>
 
-      <hr class="my-6 border-dashed border-skin-line" />
+      <hr class="my-6 border-dashed border-border" />
 
       <h3>What Is This Website, Really?</h3>
       <p>
@@ -59,9 +59,9 @@ import Footer from "@/components/Footer.astro";
         <li>My latest hands-on trials across hardware, 3D modeling, and software.</li>
       </ul>
 
-      <hr class="my-6 border-dashed border-skin-line" />
+      <hr class="my-6 border-dashed border-border" />
 
-      <blockquote class="my-6 border-l-4 border-skin-accent pl-4 italic">
+      <blockquote class="my-6 border-l-4 border-accent pl-4 italic text-muted-foreground">
         🐾 <strong>A Quick Note (Zuzu):</strong><br />
         If you click and pet the little tuxedo cat following you around as you browse the site, that’s <strong>Zuzu</strong>—my own cat, born on August 13, 2021. I wanted him to keep you company while you explore!
       </blockquote>
@@ -71,15 +71,12 @@ import Footer from "@/components/Footer.astro";
 </Layout>
 
 <style>
-  .about-content {
-    color: var(--color-text-base);
-  }
   .about-content p {
     margin-bottom: 1rem;
     line-height: 1.75;
   }
   .about-content h3 {
-    color: var(--color-text-base);
+    color: var(--accent, #38bdf8);
     font-size: 1.25rem;
     font-weight: 600;
     margin-top: 1.5rem;
@@ -95,17 +92,15 @@ import Footer from "@/components/Footer.astro";
     line-height: 1.6;
   }
   .about-content a {
-    color: var(--color-accent);
+    color: var(--accent, #38bdf8);
     text-decoration: underline;
     text-underline-offset: 4px;
+    transition: color 0.15s ease-in-out;
   }
   .about-content a:hover {
-    opacity: 0.8;
+    color: var(--accent-purple, #c084fc);
   }
   .about-content strong {
-    color: var(--color-text-base);
-  }
-  .about-content blockquote {
-    color: var(--color-text-base);
+    font-weight: 600;
   }
 </style>
