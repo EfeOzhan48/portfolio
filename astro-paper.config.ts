@@ -8,7 +8,6 @@ export default defineAstroPaperConfig({
     description: "Kişisel portfolyo, projeler ve mühendislik/yazılım notları.",
     title: "Efe Özhan",
     ogImage: "astropaper-og.jpg",
-    lightAndDarkMode: true,
   },
   posts: {
     perPage: 4,
