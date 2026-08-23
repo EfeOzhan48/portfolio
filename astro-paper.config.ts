@@ -26,7 +26,10 @@ export default defineAstroPaperConfig({
   },
   socials: [
     { name: "github", url: "https://github.com/EfeOzhan48" },
-    { name: "linkedin", url: "https://www.linkedin.com/in/durmuş-efe-özhan-0719a4323/" },
+    { 
+      name: "linkedin", 
+      url: "https://www.linkedin.com/in/durmu%C5%9F-efe-%C3%B6zhan-0719a4323/" 
+    },
     { name: "mail", url: "mailto:ozhanefe33@gmail.com" },
   ],
   shareLinks: [
