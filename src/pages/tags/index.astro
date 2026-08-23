@@ -31,7 +31,7 @@ const homePath = getRelativeLocaleUrl(locale, "");
     id="main-content"
     data-layout="index"
     data-home-path={homePath}
-    class="app-layout my-1"
+    class="app-layout my-1 mx-auto w-full max-w-app px-4"
   >
     <section id="hero" class="border-border border-b pt-8 pb-6">
       <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
@@ -40,7 +40,7 @@ const homePath = getRelativeLocaleUrl(locale, "");
       <a
         target="_blank"
         href={`${import.meta.env.BASE_URL.replace(/\/?$/, "/")}rss.xml`}
-        class="inline-block"
+        class="inline-block ms-2"
         aria-label="RSS Feed"
         title="RSS Feed"
       >
@@ -52,14 +52,14 @@ const homePath = getRelativeLocaleUrl(locale, "");
         <span class="sr-only">RSS Feed</span>
       </a>
 
-      <p class="text-lg">
+      <p class="text-lg text-muted-foreground mt-2">
         Welcome to my personal digital devlog where I document my engineering journey, experiments, and open-source projects.
       </p>
 
       {
         socials.length > 0 && (
-          <div class="mt-4 flex max-sm:flex-col sm:items-center">
-            <div class="me-2 mb-1 whitespace-nowrap sm:mb-0">
+          <div class="mt-6 flex max-sm:flex-col sm:items-center">
+            <div class="me-2 mb-1 whitespace-nowrap font-semibold sm:mb-0">
               Social Links:
             </div>
             <Socials />
@@ -107,32 +107,32 @@ const homePath = getRelativeLocaleUrl(locale, "");
     <div class="my-8 text-center">
       <LinkButton href={getRelativeLocaleUrl(locale, "posts")}>
         All Posts
-        <IconArrowRight class="inline-block rtl:-rotate-180" />
+        <IconArrowRight class="inline-block rtl:-rotate-180 ms-1" />
       </LinkButton>
     </div>
 
-    <!-- Get In Touch Section (Görseldeki İki Sütunlu Kart Tasarımı) -->
-    <section id="contact" class="border-border border-t pt-12 pb-8">
-      <h2 class="text-3xl font-bold text-center tracking-tight mb-8">
+    <!-- Get In Touch Section (Modern İki Sütunlu Kart) -->
+    <section id="contact" class="border-border border-t pt-12 pb-12">
+      <h2 class="text-3xl font-bold text-center tracking-tight mb-8 text-accent">
         Get In Touch
       </h2>
 
       <div class="grid grid-cols-1 md:grid-cols-12 gap-8 items-start">
         <!-- Sol Taraf: İletişim Bilgileri -->
-        <div class="md:col-span-5 flex flex-col gap-6 pt-2">
+        <div class="md:col-span-5 flex flex-col gap-5 pt-2">
           <!-- Email -->
           <a 
-            href="mailto:ozhanefe33@gmail.com" 
-            class="flex items-center gap-4 group p-2 rounded-lg hover:bg-skin-card transition-colors"
+            href="mailto:durmusefeozhan@gmail.com" 
+            class="flex items-center gap-4 group p-3 rounded-xl border border-border bg-muted/20 hover:border-accent hover:bg-muted/40 transition-all duration-150"
           >
-            <div class="w-12 h-12 rounded-full bg-skin-card border border-skin-line flex items-center justify-center group-hover:border-skin-accent transition-colors shrink-0">
-              <svg class="w-5 h-5 stroke-skin-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <div class="w-12 h-12 rounded-xl bg-background border border-border flex items-center justify-center group-hover:border-accent transition-colors shrink-0">
+              <svg class="w-5 h-5 stroke-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
               </svg>
             </div>
             <div>
-              <div class="text-xs uppercase font-semibold text-skin-base/60">Email</div>
-              <div class="text-sm font-medium text-skin-base group-hover:text-skin-accent transition-colors">ozhanefe33@gmail.com</div>
+              <div class="text-xs uppercase font-semibold text-muted-foreground">Email</div>
+              <div class="text-sm font-medium text-foreground group-hover:text-accent transition-colors">durmusefeozhan@gmail.com</div>
             </div>
           </a>
 
@@ -140,81 +140,81 @@ const homePath = getRelativeLocaleUrl(locale, "");
           <a 
             href="https://www.linkedin.com/in/durmuş-efe-özhan-0719a4323/" 
             target="_blank" 
-            rel="noopener noreferrer"
-            class="flex items-center gap-4 group p-2 rounded-lg hover:bg-skin-card transition-colors"
+            rel="noopener noreferrer" 
+            class="flex items-center gap-4 group p-3 rounded-xl border border-border bg-muted/20 hover:border-accent hover:bg-muted/40 transition-all duration-150"
           >
-            <div class="w-12 h-12 rounded-full bg-skin-card border border-skin-line flex items-center justify-center group-hover:border-skin-accent transition-colors shrink-0">
-              <svg class="w-5 h-5 stroke-skin-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <div class="w-12 h-12 rounded-xl bg-background border border-border flex items-center justify-center group-hover:border-accent transition-colors shrink-0">
+              <svg class="w-5 h-5 stroke-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z" />
               </svg>
             </div>
             <div>
-              <div class="text-xs uppercase font-semibold text-skin-base/60">LinkedIn</div>
-              <div class="text-sm font-medium text-skin-base group-hover:text-skin-accent transition-colors">Durmuş Efe Özhan</div>
+              <div class="text-xs uppercase font-semibold text-muted-foreground">LinkedIn</div>
+              <div class="text-sm font-medium text-foreground group-hover:text-accent transition-colors">Durmuş Efe Özhan</div>
             </div>
           </a>
 
           <!-- Location -->
-          <div class="flex items-center gap-4 p-2">
-            <div class="w-12 h-12 rounded-full bg-skin-card border border-skin-line flex items-center justify-center shrink-0">
-              <svg class="w-5 h-5 stroke-skin-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+          <div class="flex items-center gap-4 p-3 rounded-xl border border-border bg-muted/20">
+            <div class="w-12 h-12 rounded-xl bg-background border border-border flex items-center justify-center shrink-0">
+              <svg class="w-5 h-5 stroke-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
                 <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
               </svg>
             </div>
             <div>
-              <div class="text-xs uppercase font-semibold text-skin-base/60">Location</div>
-              <div class="text-sm font-medium text-skin-base">Samsun / Muğla, Turkey</div>
+              <div class="text-xs uppercase font-semibold text-muted-foreground">Location</div>
+              <div class="text-sm font-medium text-foreground">Samsun / Muğla, Turkey</div>
             </div>
           </div>
         </div>
 
         <!-- Sağ Taraf: Form Kartı -->
-        <div class="md:col-span-7 bg-skin-card p-6 sm:p-8 rounded-2xl border border-skin-line shadow-xl">
+        <div class="md:col-span-7 bg-muted/30 p-6 sm:p-8 rounded-2xl border border-border shadow-lg">
           <form 
             action="https://formspree.io/f/xbjnyzqw" 
             method="POST" 
             class="flex flex-col gap-4"
           >
             <div>
-              <label for="name" class="block text-xs font-semibold uppercase tracking-wider text-skin-base/80 mb-1.5">Your Name</label>
+              <label for="name" class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Your Name</label>
               <input 
                 type="text" 
                 name="name" 
                 id="name" 
                 placeholder="Your Name" 
                 required
-                class="w-full px-4 py-2.5 rounded-lg bg-skin-fill border border-skin-line focus:outline-none focus:border-skin-accent text-sm text-skin-base transition-colors"
+                class="w-full px-4 py-2.5 rounded-lg bg-background border border-border focus:outline-none focus:border-accent text-sm text-foreground transition-colors placeholder:text-muted-foreground/60"
               />
             </div>
 
             <div>
-              <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-skin-base/80 mb-1.5">Your Email</label>
+              <label for="email" class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Your Email</label>
               <input 
                 type="email" 
                 name="email" 
                 id="email" 
                 placeholder="Your Email" 
                 required
-                class="w-full px-4 py-2.5 rounded-lg bg-skin-fill border border-skin-line focus:outline-none focus:border-skin-accent text-sm text-skin-base transition-colors"
+                class="w-full px-4 py-2.5 rounded-lg bg-background border border-border focus:outline-none focus:border-accent text-sm text-foreground transition-colors placeholder:text-muted-foreground/60"
               />
             </div>
 
             <div>
-              <label for="message" class="block text-xs font-semibold uppercase tracking-wider text-skin-base/80 mb-1.5">Your Message</label>
+              <label for="message" class="block text-xs font-semibold uppercase tracking-wider text-muted-foreground mb-1.5">Your Message</label>
               <textarea 
                 name="message" 
                 id="message" 
                 rows="4" 
                 placeholder="Your Message" 
                 required
-                class="w-full px-4 py-2.5 rounded-lg bg-skin-fill border border-skin-line focus:outline-none focus:border-skin-accent text-sm text-skin-base transition-colors resize-none"
+                class="w-full px-4 py-2.5 rounded-lg bg-background border border-border focus:outline-none focus:border-accent text-sm text-foreground transition-colors resize-none placeholder:text-muted-foreground/60"
               ></textarea>
             </div>
 
             <button 
               type="submit" 
-              class="mt-2 w-full sm:w-auto self-start flex items-center justify-center gap-2 bg-skin-accent text-skin-inverted px-6 py-2.5 rounded-lg font-semibold text-xs tracking-wider uppercase hover:opacity-90 active:scale-95 transition-all shadow-md"
+              class="mt-2 w-full sm:w-auto self-start flex items-center justify-center gap-2 bg-accent text-accent-foreground px-6 py-2.5 rounded-lg font-semibold text-xs tracking-wider uppercase hover:opacity-90 active:scale-95 transition-all shadow-md cursor-pointer"
             >
               <span>SEND MESSAGE</span>
               <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">

@@ -6,19 +6,19 @@
   id="zuzu-container" 
   class="fixed z-50 select-none cursor-pointer pointer-events-none will-change-[transform,top,left]"
   style="bottom: 24px; right: 24px;"
-  title="Zuzu'yu sevmek ve peşine takmak için tıkla!"
+  title="Click to pet Zuzu and make him follow you!"
 >
-  <!-- Konuşma Balonu -->
+  <!-- Speech Bubble -->
   <div 
     id="zuzu-bubble" 
     class="opacity-0 transition-opacity duration-200 absolute -top-8 left-1/2 -translate-x-1/2 bg-skin-card border border-skin-line text-skin-base text-[11px] font-mono px-2 py-1 rounded shadow whitespace-nowrap pointer-events-none"
   >
-    Miyav! Takipteyim 🐾
+    Meow! Following you 🐾
   </div>
 
-  <!-- Piksel Kedi -->
+  <!-- Pixel Cat -->
   <img 
-    id="zuzu-cat"
+    id="zuzu-cat" 
     src="/zuzu.png" 
     alt="Zuzu" 
     class="w-14 h-14 md:w-20 md:h-20 object-contain image-rendering-pixelated drop-shadow-lg pointer-events-auto transition-transform duration-150 hover:scale-110"
@@ -51,7 +51,7 @@
     const cat = document.getElementById("zuzu-cat");
     const bubble = document.getElementById("zuzu-bubble");
 
-    if (!container || !cat) return;
+    if (!container || !cat || !bubble) return;
 
     let isFollowing = false;
     let mouseX = window.innerWidth - 80;
@@ -110,11 +110,11 @@
         const rect = container.getBoundingClientRect();
         catX = rect.left;
         catY = rect.top;
-        bubble.textContent = "Miyav! Peşindeyim 🐾";
+        bubble.textContent = "Meow! Following you 🐾";
       } else {
         cat.classList.remove("walking");
         isWalking = false;
-        bubble.textContent = "Dinleniyorum... 💤";
+        bubble.textContent = "Taking a nap... 💤";
       }
 
       bubble.classList.remove("opacity-0");
@@ -124,7 +124,6 @@
     });
   }
 
-  // Hem ilk açılışta hem de Astro sayfa geçişlerinde çalıştır
   document.addEventListener("astro:page-load", initZuzu);
   if (document.readyState === "complete" || document.readyState === "interactive") {
     initZuzu();
@@ -132,4 +131,3 @@
     document.addEventListener("DOMContentLoaded", initZuzu);
   }
 </script>
-
