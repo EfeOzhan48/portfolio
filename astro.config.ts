@@ -7,6 +7,7 @@ import {
 import tailwindcss from "@tailwindcss/vite";
 import mdx from "@astrojs/mdx";
 import sitemap from "@astrojs/sitemap";
+import vercel from "@astrojs/vercel/static";
 import { unified } from "@astrojs/markdown-remark";
 import remarkToc from "remark-toc";
 import remarkCollapse from "remark-collapse";
@@ -19,11 +20,10 @@ import {
 import { transformerFileName } from "./src/utils/transformers/fileName";
 import config from "./astro-paper.config";
 
-import vercel from "@astrojs/vercel";
-
 export default defineConfig({
   site: config.site.url,
-
+  adapter: vercel(),
+  output: "static",
   integrations: [
     mdx(),
     sitemap({
@@ -31,15 +31,14 @@ export default defineConfig({
         config.features?.showArchives !== false || !page.endsWith("/archives/"),
     }),
   ],
-
   i18n: {
     locales: ["en"],
     defaultLocale: "en",
     routing: {
       prefixDefaultLocale: false,
+      redirectToDefaultLocale: false,
     },
   },
-
   markdown: {
     processor: unified({
       remarkPlugins: [
@@ -60,11 +59,9 @@ export default defineConfig({
       ],
     },
   },
-
   vite: {
     plugins: [tailwindcss()],
   },
-
   fonts: [
     {
       name: "Google Sans Code",
@@ -76,7 +73,6 @@ export default defineConfig({
       formats: ["woff", "ttf"],
     },
   ],
-
   env: {
     schema: {
       PUBLIC_GOOGLE_SITE_VERIFICATION: envField.string({
@@ -86,10 +82,7 @@ export default defineConfig({
       }),
     },
   },
-
   experimental: {
     svgOptimizer: svgoOptimizer(),
   },
-
-  adapter: vercel(),
 });
