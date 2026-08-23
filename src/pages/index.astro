@@ -57,7 +57,7 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
           <ul>
             {recentPosts.map(
               (post, index) =>
-                index < config.posts.perIndex && (
+                index < (config.posts?.perIndex ?? 4) && (
                   <Card {...post} />
                 )
             )}
