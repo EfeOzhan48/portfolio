@@ -4,11 +4,10 @@
 
 <div 
   id="zuzu-container" 
-  class="fixed bottom-3 z-50 select-none cursor-pointer will-change-[transform,left]"
-  style="left: 50px; transition: transform 0.2s ease;"
+  class="fixed z-50 select-none cursor-pointer pointer-events-none will-change-[transform,top,left]"
   title="Zuzu'yu sevmek için tıkla!"
 >
-  <!-- Tıklanınca Çıkan Balon -->
+  <!-- Tıklayınca Çıkan Balon -->
   <div 
     id="zuzu-bubble" 
     class="opacity-0 transition-opacity duration-200 absolute -top-8 left-1/2 -translate-x-1/2 bg-skin-card border border-skin-line text-skin-base text-[11px] font-mono px-2 py-1 rounded shadow whitespace-nowrap pointer-events-none"
@@ -16,12 +15,12 @@
     Miyav! 🐾
   </div>
 
-  <!-- Piksel Kedi -->
+  <!-- Piksel Kedi (Mobilde w-14, Masaüstünde md:w-24) -->
   <img 
     id="zuzu-cat"
     src="/zuzu.png" 
     alt="Zuzu" 
-    class="w-14 h-14 object-contain image-rendering-pixelated drop-shadow-md pointer-events-auto"
+    class="w-14 h-14 md:w-24 md:h-24 object-contain image-rendering-pixelated drop-shadow-lg pointer-events-auto transition-transform duration-150"
   />
 </div>
 
@@ -31,17 +30,15 @@
     image-rendering: crisp-edges;
   }
 
-  /* Yürürken hafif sekme animasyonu */
   .walking {
-    animation: zuzu-step 0.22s infinite alternate ease-in-out;
+    animation: zuzu-bounce 0.18s infinite alternate ease-in-out;
   }
 
-  @keyframes zuzu-step {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-5px); }
+  @keyframes zuzu-bounce {
+    0% { transform: translateY(0) scaleY(1); }
+    100% { transform: translateY(-6px) scaleY(0.96); }
   }
 
-  /* Sola dönerken görseli yatayda aynalar */
   .facing-left {
     transform: scaleX(-1);
   }
@@ -52,61 +49,112 @@
   const cat = document.getElementById("zuzu-cat");
   const bubble = document.getElementById("zuzu-bubble");
 
-  let currentX = 50;
-  let targetX = 50;
-  let isMoving = false;
-  let direction = 1; // 1: sağa, -1: sola
-  let speed = 1.2;
+  // Dokunmatik ekran kontrolü
+  const isTouchDevice = () => window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 768;
 
-  // Yeni rastgele bir hedef nokta belirle
-  function pickNewTarget() {
-    const screenWidth = window.innerWidth;
-    const padding = 60;
-    targetX = Math.random() * (screenWidth - padding * 2) + padding;
-    direction = targetX > currentX ? 1 : -1;
+  if (!isTouchDevice()) {
+    /* =========================================
+       MASAÜSTÜ: 2D MOUSE KOVALAMA MODU
+       ========================================= */
+    let mouseX = window.innerWidth * 0.8;
+    let mouseY = window.innerHeight * 0.8;
+    let catX = mouseX;
+    let catY = mouseY;
+    let isWalking = false;
 
-    // Yön değiştirme
-    if (direction === -1) {
-      cat.classList.add("facing-left");
-    } else {
-      cat.classList.remove("facing-left");
-    }
+    window.addEventListener("mousemove", function (e) {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+    });
 
-    isMoving = true;
-    cat.classList.add("walking");
-  }
+    function followMouse() {
+      if (container && cat) {
+        const targetX = mouseX - 48;
+        const targetY = mouseY - 48;
+        const dx = targetX - catX;
+        const dy = targetY - catY;
+        const distance = Math.hypot(dx, dy);
 
-  // Volta atma döngüsü
-  function patrol() {
-    if (isMoving && container) {
-      const distance = targetX - currentX;
+        if (distance > 35) {
+          catX += dx * 0.045;
+          catY += dy * 0.045;
 
-      if (Math.abs(distance) < speed) {
-        currentX = targetX;
-        isMoving = false;
-        cat.classList.remove("walking");
-        // Vardığı yerde 2 ila 5 saniye dinlensin
-        setTimeout(pickNewTarget, Math.random() * 3000 + 2000);
-      } else {
-        currentX += direction * speed;
+          if (dx < -2) cat.classList.add("facing-left");
+          else if (dx > 2) cat.classList.remove("facing-left");
+
+          if (!isWalking) {
+            cat.classList.add("walking");
+            isWalking = true;
+          }
+        } else {
+          if (isWalking) {
+            cat.classList.remove("walking");
+            isWalking = false;
+          }
+        }
+
+        container.style.left = catX + "px";
+        container.style.top = catY + "px";
       }
-      container.style.left = currentX + "px";
+      requestAnimationFrame(followMouse);
     }
-    requestAnimationFrame(patrol);
+    requestAnimationFrame(followMouse);
+
+  } else {
+    /* =========================================
+       MOBİL: ALT KISIMDA AKILLI DEVRİYE MODU
+       ========================================= */
+    let currentX = 20;
+    let targetX = 20;
+    let isMoving = false;
+    let direction = 1;
+    let speed = 1.1;
+
+    container.style.top = "auto";
+    container.style.bottom = "12px";
+    container.style.left = "20px";
+
+    function pickMobileTarget() {
+      const screenWidth = window.innerWidth;
+      const padding = 20;
+      targetX = Math.random() * (screenWidth - padding * 2 - 56) + padding;
+      direction = targetX > currentX ? 1 : -1;
+
+      if (direction === -1) cat.classList.add("facing-left");
+      else cat.classList.remove("facing-left");
+
+      isMoving = true;
+      cat.classList.add("walking");
+    }
+
+    function patrolMobile() {
+      if (isMoving && container) {
+        const distance = targetX - currentX;
+        if (Math.abs(distance) < speed) {
+          currentX = targetX;
+          isMoving = false;
+          cat.classList.remove("walking");
+          setTimeout(pickMobileTarget, Math.random() * 3000 + 2000);
+        } else {
+          currentX += direction * speed;
+        }
+        container.style.left = currentX + "px";
+      }
+      requestAnimationFrame(patrolMobile);
+    }
+
+    setTimeout(pickMobileTarget, 800);
+    patrolMobile();
   }
 
-  // Başlat
-  setTimeout(pickNewTarget, 1000);
-  patrol();
-
-  // Tıklanınca konuşsun
+  // Tıklanınca / Dokununca Miyavlasın
   if (cat && bubble) {
-    cat.addEventListener("click", function (e) {
+    const speak = function (e) {
       e.stopPropagation();
       bubble.classList.remove("opacity-0");
-      setTimeout(function () {
-        bubble.classList.add("opacity-0");
-      }, 1500);
-    });
+      setTimeout(() => bubble.classList.add("opacity-0"), 1500);
+    };
+    cat.addEventListener("click", speak);
+    cat.addEventListener("touchstart", speak, { passive: true });
   }
 </script>
