@@ -1,101 +1,240 @@
 ---
 import { getCollection } from "astro:content";
+import { getRelativeLocaleUrl } from "astro:i18n";
+import IconRss from "@/assets/icons/IconRss.svg";
+import IconArrowRight from "@/assets/icons/IconArrowRight.svg";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
-import LinkButton from "@/components/LinkButton.astro";
-import Card from "@/components/Card.astro";
 import Socials from "@/components/Socials.astro";
+import Card from "@/components/Card.astro";
+import LinkButton from "@/components/LinkButton.astro";
 import { getSortedPosts } from "@/utils/getSortedPosts";
+import { useTranslations } from "@/i18n";
 import config from "@/config";
 
-const rawPosts = await getCollection("posts");
-const posts = rawPosts.filter(post => Boolean(post?.data?.title));
+const { socials, posts: postsConfig } = config;
 
+const locale = Astro.currentLocale ?? config.site.lang;
+const t = useTranslations(locale);
+
+const posts = await getCollection("posts");
 const sortedPosts = getSortedPosts(posts);
 const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
+const homePath = getRelativeLocaleUrl(locale, "");
 ---
 
 <Layout>
   <Header />
-  <main id="main-content" class="mx-auto w-full max-w-app px-4 pb-4">
-    <section id="hero" class="pb-6 pt-8">
-      <h1 class="my-4 inline-block text-3xl font-bold sm:my-8 sm:text-5xl">
-        Hey, I'm {config.site.author} 👋
+  <main
+    id="main-content"
+    data-layout="index"
+    data-home-path={homePath}
+    class="app-layout my-1 mx-auto w-full max-w-app px-4"
+  >
+    <!-- Hero Section -->
+    <section id="hero" class="border-border border-b pt-8 pb-6">
+      <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
+        Hey, I'm Durmuş Efe Özhan 👋
       </h1>
-      <p class="my-4">
-        {config.site.description}
+      <a
+        target="_blank"
+        href={`${import.meta.env.BASE_URL.replace(/\/?$/, "/")}rss.xml`}
+        class="inline-block ms-2"
+        aria-label="RSS Feed"
+        title="RSS Feed"
+      >
+        <IconRss
+          width={20}
+          height={20}
+          class="stroke-accent scale-125 stroke-3 rtl:-rotate-90"
+        />
+        <span class="sr-only">RSS Feed</span>
+      </a>
+
+      <p class="text-lg text-muted-foreground mt-2">
+        Welcome to my personal digital devlog where I document my engineering journey, experiments, and open-source projects.
       </p>
 
-      <div class="social-wrapper my-4 flex flex-col sm:flex-row sm:items-center">
-        <div class="social-links mb-1 mr-2 whitespace-nowrap font-semibold sm:mb-0">
-          Social Links:
-        </div>
-        <Socials />
-      </div>
+      {
+        socials.length > 0 && (
+          <div class="mt-6 flex max-sm:flex-col sm:items-center">
+            <div class="me-2 mb-1 whitespace-nowrap font-semibold sm:mb-0">
+              Social Links:
+            </div>
+            <Socials />
+          </div>
+        )
+      }
 
-      <!-- Doğrudan Mail Atılabilir Get in Touch Bölümü -->
-      <div class="mt-6 rounded-lg border border-dashed border-border bg-muted/40 p-4 sm:p-5">
-        <h2 class="text-lg font-bold tracking-wide text-accent flex items-center gap-2">
-          <span>📬</span> Get in Touch
-        </h2>
-        <p class="my-2 text-sm text-foreground">
-          Have a question, a project idea, or just want to chat? Feel free to drop me an email:
-        </p>
-        <a
-          href="mailto:durmusefeozhan@gmail.com"
-          class="inline-flex items-center gap-2 text-sm font-semibold text-accent underline decoration-dashed underline-offset-4 hover:text-[var(--accent-purple)]"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-          </svg>
-          durmusefeozhan@gmail.com
-        </a>
+      <!-- Get In Touch -->
+      <div id="contact" class="mt-8">
+        <div class="grid grid-cols-1 md:grid-cols-12 gap-6 items-start">
+          <!-- Sol Taraf: İletişim Bilgileri -->
+          <div class="md:col-span-5 flex flex-col gap-4">
+            <!-- Email -->
+            <a 
+              href="mailto:durmusefeozhan@gmail.com" 
+              class="flex items-center gap-3.5 group p-3 rounded-xl border border-border bg-muted/20 hover:border-accent hover:bg-muted/40 transition-all duration-150"
+            >
+              <div class="w-10 h-10 rounded-lg bg-background border border-border flex items-center justify-center group-hover:border-accent transition-colors shrink-0">
+                <svg class="w-4 h-4 stroke-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+              </div>
+              <div class="overflow-hidden">
+                <div class="text-[11px] uppercase font-semibold text-muted-foreground">Email</div>
+                <div class="text-xs font-medium text-foreground group-hover:text-accent transition-colors truncate">durmusefeozhan@gmail.com</div>
+              </div>
+            </a>
+
+            <!-- LinkedIn -->
+            <a 
+              href="https://www.linkedin.com/in/durmuş-efe-özhan-0719a4323/" 
+              target="_blank" 
+              rel="noopener noreferrer" 
+              class="flex items-center gap-3.5 group p-3 rounded-xl border border-border bg-muted/20 hover:border-accent hover:bg-muted/40 transition-all duration-150"
+            >
+              <div class="w-10 h-10 rounded-lg bg-background border border-border flex items-center justify-center group-hover:border-accent transition-colors shrink-0">
+                <svg class="w-4 h-4 stroke-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z" />
+                </svg>
+              </div>
+              <div>
+                <div class="text-[11px] uppercase font-semibold text-muted-foreground">LinkedIn</div>
+                <div class="text-xs font-medium text-foreground group-hover:text-accent transition-colors">Durmuş Efe Özhan</div>
+              </div>
+            </a>
+
+            <!-- Location -->
+            <div class="flex items-center gap-3.5 p-3 rounded-xl border border-border bg-muted/20">
+              <div class="w-10 h-10 rounded-lg bg-background border border-border flex items-center justify-center shrink-0">
+                <svg class="w-4 h-4 stroke-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                </svg>
+              </div>
+              <div>
+                <div class="text-[11px] uppercase font-semibold text-muted-foreground">Location</div>
+                <div class="text-xs font-medium text-foreground">Samsun / Muğla, Turkey</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Sağ Taraf: Form Kartı -->
+          <div class="md:col-span-7 bg-muted/30 p-5 sm:p-6 rounded-2xl border border-border shadow-md">
+            <form 
+              action="https://formspree.io/f/xbjnyzqw" 
+              method="POST" 
+              class="flex flex-col gap-3.5"
+            >
+              <div>
+                <label for="name" class="block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1">Your Name</label>
+                <input 
+                  type="text" 
+                  name="name" 
+                  id="name" 
+                  placeholder="Your Name" 
+                  required
+                  class="w-full px-3.5 py-2 rounded-lg bg-background border border-border focus:outline-none focus:border-accent text-sm text-foreground transition-colors placeholder:text-muted-foreground/60"
+                />
+              </div>
+
+              <div>
+                <label for="email" class="block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1">Your Email</label>
+                <input 
+                  type="email" 
+                  name="email" 
+                  id="email" 
+                  placeholder="Your Email" 
+                  required
+                  class="w-full px-3.5 py-2 rounded-lg bg-background border border-border focus:outline-none focus:border-accent text-sm text-foreground transition-colors placeholder:text-muted-foreground/60"
+                />
+              </div>
+
+              <div>
+                <label for="message" class="block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1">Your Message</label>
+                <textarea 
+                  name="message" 
+                  id="message" 
+                  rows="3" 
+                  placeholder="Your Message" 
+                  required
+                  class="w-full px-3.5 py-2 rounded-lg bg-background border border-border focus:outline-none focus:border-accent text-sm text-foreground transition-colors resize-none placeholder:text-muted-foreground/60"
+                ></textarea>
+              </div>
+
+              <button 
+                type="submit" 
+                class="mt-1 w-full sm:w-auto self-start flex items-center justify-center gap-2 bg-accent text-accent-foreground px-5 py-2 rounded-lg font-semibold text-xs tracking-wider uppercase hover:opacity-90 active:scale-95 transition-all shadow cursor-pointer"
+              >
+                <span>SEND MESSAGE</span>
+                <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+                </svg>
+              </button>
+            </form>
+          </div>
+        </div>
       </div>
     </section>
 
-    <hr class="my-6 border-dashed border-border" />
-
+    <!-- Featured Posts -->
     {
       featuredPosts.length > 0 && (
-        <section id="featured" class="pb-6 pt-8">
-          <h2 class="text-2xl font-semibold tracking-wide">Featured</h2>
+        <section
+          id="featured"
+          class:list={[
+            "pt-12 pb-6",
+            { "border-border border-b": recentPosts.length > 0 },
+          ]}
+        >
+          <h2 class="text-2xl font-semibold tracking-wide">
+            Featured
+          </h2>
           <ul>
-            {featuredPosts.map(post => (
-              <Card {...post} />
+            {featuredPosts.map(data => (
+              <Card variant="h3" {...data} />
             ))}
           </ul>
         </section>
       )
     }
 
+    <!-- Recent Posts -->
     {
       recentPosts.length > 0 && (
-        <section id="recent-posts" class="pb-6 pt-8">
-          <h2 class="text-2xl font-semibold tracking-wide">Recent Posts</h2>
+        <section id="recent-posts" class="pt-12 pb-6">
+          <h2 class="text-2xl font-semibold tracking-wide">
+            Recent Posts
+          </h2>
           <ul>
-            {recentPosts.map(
-              (post, index) =>
-                index < 4 && (
-                  <Card {...post} />
-                )
-            )}
+            {recentPosts.slice(0, postsConfig.perIndex).map(data => (
+              <Card variant="h3" {...data} />
+            ))}
           </ul>
         </section>
       )
     }
 
-    <div class="all-posts-btn-wrapper my-8 text-center">
-      <LinkButton href="/posts/">
+    <div class="my-8 text-center">
+      <LinkButton href={getRelativeLocaleUrl(locale, "posts")}>
         All Posts
-        <svg xmlns="http://www.w3.org/2000/svg" class="inline-block h-6 w-6">
-          <path
-            d="m11.293 17.293 1.414 1.414L19.414 12l-6.707-6.707-1.414 1.414L15.586 11H6v2h9.586z"
-          ></path>
-        </svg>
+        <IconArrowRight class="inline-block rtl:-rotate-180 ms-1" />
       </LinkButton>
     </div>
   </main>
   <Footer />
 </Layout>
+
+<script>
+  document.addEventListener("astro:page-load", () => {
+    const indexLayout = (document.querySelector("#main-content") as HTMLElement)
+      ?.dataset;
+    const baseRoot = import.meta.env.BASE_URL.replace(/\/?$/, "/");
+    if (indexLayout?.layout) {
+      sessionStorage.setItem("backUrl", indexLayout.homePath ?? baseRoot);
+    }
+  });
+</script>
