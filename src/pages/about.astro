@@ -2,13 +2,14 @@
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
+import Main from "@/layouts/Main.astro";
+import Breadcrumbs from "@/components/Breadcrumbs.astro";
 ---
 
 <Layout title="About Me | Durmuş Efe Özhan">
   <Header activeNav="about" />
-  <main id="main-content" class="mx-auto w-full max-w-app px-4 pb-12 pt-8">
-    <h1 class="text-2xl font-semibold tracking-wide sm:text-3xl">About Me</h1>
-    
+  <Breadcrumbs />
+  <Main pageTitle="About Me" pageDesc="A little background about who I am and what I do.">
     <article id="article" class="prose mx-auto mt-8 max-w-app prose-img:border-0">
       <p>
         Hey there! I'm <strong>Durmuş Efe Özhan</strong>.
@@ -17,7 +18,7 @@ import Footer from "@/components/Footer.astro";
         I was born in Mersin on June 30, 2005, but I actually live in Muğla. After graduating from Muğla Gazi Anatolian High School in 2023, I started studying <strong>Computer Engineering at Samsun Ondokuz Mayıs University</strong> in 2024, and I'm currently continuing my journey here.
       </p>
 
-      <hr class="border-dashed border-skin-line my-6" />
+      <hr class="my-6 border-dashed border-skin-line" />
 
       <h3>What Am I Working On?</h3>
       <p>
@@ -32,7 +33,7 @@ import Footer from "@/components/Footer.astro";
         <li><strong>University Clubs:</strong> Actively participating in student clubs and taking part in new projects.</li>
       </ul>
 
-      <hr class="border-dashed border-skin-line my-6" />
+      <hr class="my-6 border-dashed border-skin-line" />
 
       <h3>Beyond the Code: Interests & Hobbies</h3>
       <p>
@@ -46,7 +47,7 @@ import Footer from "@/components/Footer.astro";
         <li><strong>Short-Term Goal:</strong> Alongside software, I want to learn 3D modeling this year to get physical outputs, and dive into electronics to build more tangible, hands-on projects.</li>
       </ul>
 
-      <hr class="border-dashed border-skin-line my-6" />
+      <hr class="my-6 border-dashed border-skin-line" />
 
       <h3>What Is This Website, Really?</h3>
       <p>
@@ -59,13 +60,13 @@ import Footer from "@/components/Footer.astro";
         <li>My latest hands-on trials across hardware, 3D modeling, and software.</li>
       </ul>
 
-      <hr class="border-dashed border-skin-line my-6" />
+      <hr class="my-6 border-dashed border-skin-line" />
 
-      <blockquote class="border-l-4 border-skin-accent pl-4 italic">
+      <blockquote class="my-6 border-l-4 border-skin-accent pl-4 italic">
         🐾 <strong>A Quick Note (Zuzu):</strong><br />
         If you click and pet the little tuxedo cat following you around as you browse the site, that’s <strong>Zuzu</strong>—my own cat, born on August 13, 2021. I wanted him to keep you company while you explore!
       </blockquote>
     </article>
-  </main>
+  </Main>
   <Footer />
 </Layout>
