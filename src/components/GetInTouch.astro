@@ -1,0 +1,116 @@
+---
+// src/components/GetInTouch.astro
+---
+
+<section id="contact" class="my-12 pt-8 border-t border-skin-line">
+  <h2 class="text-3xl font-bold text-center mb-8">Get In Touch</h2>
+
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-8 items-start">
+    <!-- Sol Taraf: İletişim Bilgileri -->
+    <div class="flex flex-col gap-6 pt-2">
+      <!-- Email -->
+      <a 
+        href="mailto:ozhanefe33@gmail.com" 
+        class="flex items-center gap-4 group p-2 rounded-lg hover:bg-skin-card transition-colors"
+      >
+        <div class="w-12 h-12 rounded-full bg-skin-card flex items-center justify-center border border-skin-line group-hover:border-skin-accent transition-colors shrink-0">
+          <svg class="w-5 h-5 stroke-skin-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+          </svg>
+        </div>
+        <div>
+          <div class="text-sm text-skin-base/70">Email</div>
+          <div class="text-skin-base font-medium group-hover:text-skin-accent transition-colors">ozhanefe33@gmail.com</div>
+        </div>
+      </a>
+
+      <!-- LinkedIn -->
+      <a 
+        href="https://www.linkedin.com/in/durmuş-efe-özhan-0719a4323/" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="flex items-center gap-4 group p-2 rounded-lg hover:bg-skin-card transition-colors"
+      >
+        <div class="w-12 h-12 rounded-full bg-skin-card flex items-center justify-center border border-skin-line group-hover:border-skin-accent transition-colors shrink-0">
+          <svg class="w-5 h-5 stroke-skin-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2zM4 6a2 2 0 100-4 2 2 0 000 4z" />
+          </svg>
+        </div>
+        <div>
+          <div class="text-sm text-skin-base/70">LinkedIn</div>
+          <div class="text-skin-base font-medium group-hover:text-skin-accent transition-colors">Durmuş Efe Özhan</div>
+        </div>
+      </a>
+
+      <!-- Location -->
+      <div class="flex items-center gap-4 p-2">
+        <div class="w-12 h-12 rounded-full bg-skin-card flex items-center justify-center border border-skin-line shrink-0">
+          <svg class="w-5 h-5 stroke-skin-accent" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+            <path stroke-linecap="round" stroke-linejoin="round" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+          </svg>
+        </div>
+        <div>
+          <div class="text-sm text-skin-base/70">Location</div>
+          <div class="text-skin-base font-medium">Samsun / Muğla, Turkey</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Sağ Taraf: İletişim Formu -->
+    <div class="bg-skin-card p-6 md:p-8 rounded-2xl border border-skin-line shadow-lg">
+      <form 
+        action="https://formspree.io/f/xbjnyzqw" 
+        method="POST" 
+        class="flex flex-col gap-4"
+        id="contact-form"
+      >
+        <div>
+          <label for="name" class="block text-xs font-semibold mb-1 tracking-wider uppercase opacity-80">Your Name</label>
+          <input 
+            type="text" 
+            name="name" 
+            id="name" 
+            placeholder="John Doe" 
+            required
+            class="w-full px-4 py-2.5 rounded-lg bg-skin-fill border border-skin-line focus:outline-none focus:border-skin-accent text-sm text-skin-base transition-colors"
+          />
+        </div>
+
+        <div>
+          <label for="email" class="block text-xs font-semibold mb-1 tracking-wider uppercase opacity-80">Your Email</label>
+          <input 
+            type="email" 
+            name="email" 
+            id="email" 
+            placeholder="john@example.com" 
+            required
+            class="w-full px-4 py-2.5 rounded-lg bg-skin-fill border border-skin-line focus:outline-none focus:border-skin-accent text-sm text-skin-base transition-colors"
+          />
+        </div>
+
+        <div>
+          <label for="message" class="block text-xs font-semibold mb-1 tracking-wider uppercase opacity-80">Your Message</label>
+          <textarea 
+            name="message" 
+            id="message" 
+            rows="4" 
+            placeholder="Hello! Let's talk about..." 
+            required
+            class="w-full px-4 py-2.5 rounded-lg bg-skin-fill border border-skin-line focus:outline-none focus:border-skin-accent text-sm text-skin-base transition-colors resize-none"
+          ></textarea>
+        </div>
+
+        <button 
+          type="submit" 
+          class="mt-2 w-full sm:w-auto self-start flex items-center justify-center gap-2 bg-skin-accent text-skin-inverted px-6 py-2.5 rounded-lg font-medium hover:opacity-90 transition-opacity active:scale-95 shadow-md"
+        >
+          <span>SEND MESSAGE</span>
+          <svg class="w-4 h-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
+          </svg>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>

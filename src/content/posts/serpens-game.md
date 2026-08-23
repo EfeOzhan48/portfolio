@@ -1,7 +1,7 @@
 ---
 author: Durmuş Efe Özhan
 pubDatetime: 2026-08-01T12:00:00Z
-title: "Serpens Game: 5 Seviyeli Retro Yılan Macerası"
+title: "Serpens Game: 5-Level Retro Snake Adventure"
 featured: true
 draft: false
 tags:
@@ -10,55 +10,65 @@ tags:
   - gamedev
   - arcade
   - retro
-description: İsmini gökyüzündeki ikiye bölünmüş Serpens takımyıldızından alan, 5 farklı zorluk seviyesine ve checkpoint sistemine sahip Pygame projesi.
+description: A 5-level retro snake game built with Pygame, inspired by the split Serpens constellation and featuring an active checkpoint system.
 ---
 
-> **Serpens**, Latince'de "yılan" anlamına gelir ve gökyüzündeki tek ikiye bölünmüş takımyıldızının adıdır. *Ophiuchus (Yılancı)* tarafından **Serpens Caput** (yılanın başı) ve **Serpens Cauda** (yılanın kuyruğu) olarak ikiye ayrılır.
+> **Serpens** is Latin for "snake" and the only constellation split into two parts across the sky—divided into **Serpens Caput** (the head) and **Serpens Cauda** (the tail) by *Ophiuchus (the Serpent Bearer)*.
 
-Bu proje, klasik arcade yılan oyununu 5 kademeli zorluk mimarisi, checkpoint kayıt sistemi ve retro görsel/font atmosferiyle modern bir oynanışa kavuşturur.
+This project revamps the classic arcade snake game with 5 escalating challenge tiers, checkpoint persistence, and retro pixel typography.
 
 ---
 
-## Oynanış ve Kontroller
+## Gameplay & Controls
 
-Yemi toplayarak seviye hedefine ulaşın. Duvarlara veya kendi gövdenize çarparsanız oyun sona erer.
+Collect food items to reach the level target. Hitting walls or your own tail ends the game.
 
-| Tuş | Eylem |
+| Key | Action |
 | :--- | :--- |
-| `←` `→` `↑` `↓` | Yılanı Yönlendir |
-| `Sol Shift` | Hızlan (Boost) |
+| `←` `→` `↑` `↓` | Navigate Snake |
+| `Left Shift` | Speed Boost |
 
 ---
 
-## Seviyeler (Levels)
+## Level Breakdown
 
-Her seviye geçişinde yılanın boyutu sıfırlanır ve yeni bir zorluk mekaniği devreye girer:
+Each level resets snake length and introduces a new mechanic:
 
-| Level | Hedef | Özellik |
+| Level | Target | Mechanic |
 | :---: | :--- | :--- |
-| **1** | 15 Yiyecek | Klasik yılan oynanışı |
-| **2** | 10 Yiyecek | Daha hızlı yılan |
-| **3** | 5 Yiyecek | Haritaya eklenen engeller |
-| **4** | 3 Yiyecek | Engeller + Hareketli yem |
-| **5** | 1 Yiyecek | Çok hızlı hareket eden özel yem |
+| **1** | 15 Food | Classic snake mechanics |
+| **2** | 10 Food | Increased base speed |
+| **3** | 5 Food | Static obstacle layout |
+| **4** | 3 Food | Obstacles + Moving food |
+| **5** | 1 Food | Ultra-fast dodging food |
 
 ---
 
-## Öne Çıkan Özellikler
+## Key Features
 
-- **Checkpoint Sistemi:** İlerleme durumu `checkpoint.json` dosyasına kaydedilir; aynı kullanıcı adıyla oyuna girildiğinde kalınan seviyeden devam edilebilir.
-- **Retro Tipografi:** Klasik arcade hissini korumak için `PressStart2P` piksel yazı tipi entegrasyonu.
-- **Dinamik Fizik & Hız:** Seviyeler ilerledikçe değişen kare hızı (FPS) ve engel düzenleri.
+- **Checkpoint System:** State is automatically saved to `checkpoint.json`; resuming with the same profile picks up where you left off.
+- **Retro Typography:** Integrated `PressStart2P` pixel font for authentic arcade aesthetic.
+- **Dynamic Physics:** Progressive difficulty scaling with variable game ticks and obstacle barriers.
 
 ---
 
-## Kurulum ve Çalıştırma
+## Installation & Running
 
-Projeyi yerel makinenizde çalıştırmak için Python ortamınızda `pygame` kütüphanesinin kurulu olması yeterlidir:
+Ensure you have Python and `pygame` installed:
 
 ```bash
-# Gerekli bağımlılığı yükleyin
+# Install dependency
 pip install pygame
 
-# Oyunu başlatın
+# Run game
 python serpens_game.py
+
+Requirements
+Python 3.x
+
+pygame
+
+PressStart2P-Regular.ttf (Included in repository)
+
+Source Code
+GitHub: github.com/EfeOzhan48/serpens

@@ -1,47 +1,57 @@
 ---
 layout: ../layouts/AboutLayout.astro
-title: "Hakkımda"
+title: "About"
 ---
 
-Selam! Ben **Durmuş Efe Özhan**. 
+Hey! I'm **Durmuş Efe Özhan**.
 
-30 Haziran 2005'te Mersin'de doğdum ama aslen Muğla'da yaşıyorum. 2023'te Muğla Gazi Anadolu Lisesi'nden mezun olduktan sonra, 2024 yılında **Samsun Ondokuz Mayıs Üniversitesi Bilgisayar Mühendisliği** bölümüne başladım ve yolculuğuma burada devam ediyorum.
-
----
-
-### Nelerle Uğraşıyorum?
-
-Mühendislikte tek bir alana takılıp kalmak yerine işin mutfağına girip sistemlerin nasıl çalıştığını kurcalamayı seviyorum. "Bu işin arkasında ne dönüyor?" merakıyla farklı teknolojileri deneyimliyor, kendime en uygun alanı keşfetmeye çalışıyorum.
-
-Kodlamanın yanında topluluk tarafında da aktif olmayı önemsiyorum:
-* **TEVED (Teknoloji ve Verimlilik Derneği):** Kurucu ekibinde yer aldığım derneğimizde teknolojiyi ve verimliliği yaygınlaştırmaya çalışıyoruz ([teved.org](https://teved.org)).
-* **GDG Samsun:** Google Developer Groups Samsun ekibiyle topluluk etkinlikleri ve buluşmalar organize ediyoruz.
-* **Üniversite Toplulukları:** Okul kulüplerinde aktif olarak yer alıp yeni projelerin parçası oluyorum.
+Born on June 30, 2005 in Mersin, I live in Muğla. After graduating from Muğla Gazi Anatolian High School in 2023, I started pursuing my degree in **Computer Engineering at Ondokuz Mayıs University** in 2024.
 
 ---
 
-### Kod Dışında: Meraklar ve Hobiler
+### What I Do & My Mindset
 
-Kısacası yeni şeyler deneyimlemek ve gözlemlemek bana her zaman ayrı bir heyecan veriyor:
+Instead of restricting myself to a single subfield, I enjoy getting my hands dirty to understand how complex systems operate under the hood. Driven by curiosity about what actually happens behind the scenes, I build and test across different domains to find the best solutions.
 
-* **İnsan Psikolojisi & Davranış:** İnsan psikolojisine ciddi bir merakım var; davranış kalıplarını anlamak, insanları analiz etmek ve bu alandaki makaleleri/yazıları okuyup yeni perspektifler kazanmayı seviyorum.
-* **Sinema & Dizi:** Sıkı bir izleyiciyim. İzledikten sonra Letterboxd üzerinden insanların yorumlarını okumayı, analizleri incelemeyi ve puanlama yapmayı çok severim.
-* **Spor:** Aktif olarak fitness ile ilgileniyorum; bunun yanında futbol, basketbol oynamayı ve farklı spor branşlarını deneyimlemeyi seviyorum.
-* **Mutfak Deneyleri:** Yeni yemek tarifleri keşfetmek, tarifleri kafama göre modifiye edip ortaya özgün tatlar çıkarmak en keyif aldığım kafa dağıtma yöntemlerinden biri.
-* **Yakın Dönem Hedefim:** Bu sene yazılımın yanında 3D modelleme öğrenip fiziksel çıktılar almak ve işin elektrik-elektronik boyutuna girerek daha somut, dokunulabilir projeler üretmek istiyorum.
-
----
-
-### Bu Site Aslında Ne?
-
-Burası sadece "bakın neler yaptım" dediğim klasik bir portfolyo değil; daha çok benim **açık kaynaklı geliştirici günlüğüm**.
-
-Burada:
-- Geliştirdiğim projeleri,
-- Hevesle başlayıp yarım bıraktığım ya da *"yok bu yöntem pek mantıklı değilmiş"* deyip neden vazgeçtiğimi anlattığım denemeleri,
-- Donanım, 3D modelleme ve yazılım tarafındaki güncel denemelerimi paylaşıyorum.
+Community building and collaboration are core to my work:
+* **TEVED (Technology & Productivity Association):** As a founding member, I work on expanding technology literacy and efficiency ([teved.org](https://teved.org)).
+* **GDG Samsun:** Active team member organizing developer events with Google Developer Groups Samsun.
+* **University Communities:** Participating actively in campus engineering and entrepreneurship clubs.
 
 ---
 
-> 🐾 **Ufak Bir Not (Zuzu):**  
-> Sayfada gezinirken tıklayıp severseniz peşinize takılan o küçük smokin kedi **Zuzu**, 13 Ağustos 2021 doğumlu kendi kedim. Sitede dolaşırken size eşlik etsin istedim!
+### Beyond Code: Interests & Hobbies
+
+Exploring new disciplines and observing patterns keeps me motivated:
+
+* **Human Psychology & Behavior:** I have a deep interest in psychology—analyzing behavior, reading academic articles, and learning how humans think.
+* **Cinema & TV Shows:** Passionate cinephile. I love reading reviews and discussions on Letterboxd after watching films and sharing ratings.
+* **Sports & Training:** Active fitness practitioner, alongside playing basketball, football, and exploring different athletic disciplines.
+* **Culinary Experiments:** Testing new recipes and tweaking them to create custom flavors is one of my go-to creative outlets.
+* **Current Focus:** Expanding into 3D modeling/printing and basic electrical engineering to create tangible, physical hardware projects.
+
+---
+
+### What is This Site?
+
+This is not just a polished showcase—it's my **open-source developer logbook**.
+
+Here you'll find:
+- Custom tools and applications I build,
+- Experiments I pivoted away from or scrapped (with transparent takeaways on why),
+- Ongoing notes covering software architecture, hardware prototypes, and 3D builds.
+
+---
+
+### Get in Touch
+
+I'm always open to discussing new ideas, collaborating on open-source software, or connecting with fellow engineers.
+
+* **Email:** [ozhanefe33@gmail.com](mailto:ozhanefe33@gmail.com)
+* **LinkedIn:** [linkedin.com/in/durmuş-efe-özhan-0719a4323](https://www.linkedin.com/in/durmuş-efe-özhan-0719a4323/)
+* **GitHub:** [github.com/EfeOzhan48](https://github.com/EfeOzhan48)
+
+---
+
+> 🐾 **Sidekick Note (Zuzu):**  
+> The tuxedo cat following your cursor when clicked is **Zuzu**, born August 13, 2021. He's here to keep you company while exploring the site!
