@@ -5,22 +5,23 @@
 <div 
   id="zuzu-container" 
   class="fixed z-50 select-none cursor-pointer pointer-events-none will-change-[transform,top,left]"
-  title="Zuzu'yu sevmek için tıkla!"
+  style="bottom: 24px; right: 24px;"
+  title="Zuzu'yu sevmek ve peşine takmak için tıkla!"
 >
-  <!-- Tıklayınca Çıkan Balon -->
+  <!-- Konuşma Balonu -->
   <div 
     id="zuzu-bubble" 
     class="opacity-0 transition-opacity duration-200 absolute -top-8 left-1/2 -translate-x-1/2 bg-skin-card border border-skin-line text-skin-base text-[11px] font-mono px-2 py-1 rounded shadow whitespace-nowrap pointer-events-none"
   >
-    Miyav! 🐾
+    Miyav! Takipteyim 🐾
   </div>
 
-  <!-- Piksel Kedi (Mobilde w-14, Masaüstünde md:w-24) -->
+  <!-- Piksel Kedi -->
   <img 
     id="zuzu-cat"
     src="/zuzu.png" 
     alt="Zuzu" 
-    class="w-14 h-14 md:w-24 md:h-24 object-contain image-rendering-pixelated drop-shadow-lg pointer-events-auto transition-transform duration-150"
+    class="w-14 h-14 md:w-20 md:h-20 object-contain image-rendering-pixelated drop-shadow-lg pointer-events-auto transition-transform duration-150 hover:scale-110"
   />
 </div>
 
@@ -31,12 +32,12 @@
   }
 
   .walking {
-    animation: zuzu-bounce 0.18s infinite alternate ease-in-out;
+    animation: zuzu-bounce 0.2s infinite alternate ease-in-out;
   }
 
   @keyframes zuzu-bounce {
-    0% { transform: translateY(0) scaleY(1); }
-    100% { transform: translateY(-6px) scaleY(0.96); }
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-5px); }
   }
 
   .facing-left {
@@ -49,112 +50,79 @@
   const cat = document.getElementById("zuzu-cat");
   const bubble = document.getElementById("zuzu-bubble");
 
-  // Dokunmatik ekran kontrolü
-  const isTouchDevice = () => window.matchMedia("(pointer: coarse)").matches || window.innerWidth < 768;
+  let isFollowing = false;
+  let mouseX = window.innerWidth - 80;
+  let mouseY = window.innerHeight - 80;
+  let catX = mouseX;
+  let catY = mouseY;
+  let isWalking = false;
 
-  if (!isTouchDevice()) {
-    /* =========================================
-       MASAÜSTÜ: 2D MOUSE KOVALAMA MODU
-       ========================================= */
-    let mouseX = window.innerWidth * 0.8;
-    let mouseY = window.innerHeight * 0.8;
-    let catX = mouseX;
-    let catY = mouseY;
-    let isWalking = false;
+  window.addEventListener("mousemove", function (e) {
+    mouseX = e.clientX;
+    mouseY = e.clientY;
+  });
 
-    window.addEventListener("mousemove", function (e) {
-      mouseX = e.clientX;
-      mouseY = e.clientY;
-    });
+  function followLoop() {
+    if (isFollowing && container && cat) {
+      // Mouse'a çok yapışmasın diye 120px güvenli mesafe sınırı
+      const targetX = mouseX - 40;
+      const targetY = mouseY - 40;
 
-    function followMouse() {
-      if (container && cat) {
-        const targetX = mouseX - 48;
-        const targetY = mouseY - 48;
-        const dx = targetX - catX;
-        const dy = targetY - catY;
-        const distance = Math.hypot(dx, dy);
+      const dx = targetX - catX;
+      const dy = targetY - catY;
+      const distance = Math.hypot(dx, dy);
 
-        if (distance > 35) {
-          catX += dx * 0.045;
-          catY += dy * 0.045;
+      if (distance > 120) {
+        catX += dx * 0.035; // Yumuşak ve sakin takip hızı
+        catY += dy * 0.035;
 
-          if (dx < -2) cat.classList.add("facing-left");
-          else if (dx > 2) cat.classList.remove("facing-left");
+        if (dx < -2) cat.classList.add("facing-left");
+        else if (dx > 2) cat.classList.remove("facing-left");
 
-          if (!isWalking) {
-            cat.classList.add("walking");
-            isWalking = true;
-          }
-        } else {
-          if (isWalking) {
-            cat.classList.remove("walking");
-            isWalking = false;
-          }
+        if (!isWalking) {
+          cat.classList.add("walking");
+          isWalking = true;
         }
-
-        container.style.left = catX + "px";
-        container.style.top = catY + "px";
-      }
-      requestAnimationFrame(followMouse);
-    }
-    requestAnimationFrame(followMouse);
-
-  } else {
-    /* =========================================
-       MOBİL: ALT KISIMDA AKILLI DEVRİYE MODU
-       ========================================= */
-    let currentX = 20;
-    let targetX = 20;
-    let isMoving = false;
-    let direction = 1;
-    let speed = 1.1;
-
-    container.style.top = "auto";
-    container.style.bottom = "12px";
-    container.style.left = "20px";
-
-    function pickMobileTarget() {
-      const screenWidth = window.innerWidth;
-      const padding = 20;
-      targetX = Math.random() * (screenWidth - padding * 2 - 56) + padding;
-      direction = targetX > currentX ? 1 : -1;
-
-      if (direction === -1) cat.classList.add("facing-left");
-      else cat.classList.remove("facing-left");
-
-      isMoving = true;
-      cat.classList.add("walking");
-    }
-
-    function patrolMobile() {
-      if (isMoving && container) {
-        const distance = targetX - currentX;
-        if (Math.abs(distance) < speed) {
-          currentX = targetX;
-          isMoving = false;
+      } else {
+        if (isWalking) {
           cat.classList.remove("walking");
-          setTimeout(pickMobileTarget, Math.random() * 3000 + 2000);
-        } else {
-          currentX += direction * speed;
+          isWalking = false;
         }
-        container.style.left = currentX + "px";
       }
-      requestAnimationFrame(patrolMobile);
-    }
 
-    setTimeout(pickMobileTarget, 800);
-    patrolMobile();
+      container.style.left = catX + "px";
+      container.style.top = catY + "px";
+      container.style.bottom = "auto";
+      container.style.right = "auto";
+    }
+    requestAnimationFrame(followLoop);
   }
 
-  // Tıklanınca / Dokununca Miyavlasın
+  requestAnimationFrame(followLoop);
+
+  // Kediyi sevince (tıklayınca) modu aç/kapat
   if (cat && bubble) {
-    const speak = function (e) {
+    cat.addEventListener("click", function (e) {
       e.stopPropagation();
+      isFollowing = !isFollowing;
+
+      if (isFollowing) {
+        // Takip moduna geçerken konumu sabitle
+        const rect = container.getBoundingClientRect();
+        catX = rect.left;
+        catY = rect.top;
+        bubble.textContent = "Miyav! Peşindeyim 🐾";
+      } else {
+        // Takibi bırakıp dinlenme modu
+        cat.classList.remove("walking");
+        isWalking = false;
+        bubble.textContent = "Dinleniyorum... 💤";
+      }
+
       bubble.classList.remove("opacity-0");
-      setTimeout(() => bubble.classList.add("opacity-0"), 1500);
-    };
-    cat.addEventListener("click", speak);
-    cat.addEventListener("touchstart", speak, { passive: true });
+      setTimeout(function () {
+        bubble.classList.add("opacity-0");
+      }, 1600);
+    });
   }
 </script>
