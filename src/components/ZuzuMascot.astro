@@ -7,7 +7,6 @@
   class="fixed bottom-4 right-4 z-50 select-none cursor-pointer group"
   title="Zuzu'yu sevmek için tıkla!"
 >
-  <!-- Tıklayınca Çıkan Balon -->
   <div 
     id="zuzu-bubble" 
     class="opacity-0 transition-opacity duration-200 absolute -top-8 right-0 bg-skin-card border border-skin-line text-skin-base text-[11px] font-mono px-2 py-1 rounded shadow whitespace-nowrap pointer-events-none"
@@ -15,7 +14,6 @@
     Miyav! 🐾
   </div>
 
-  <!-- Piksel Kedi -->
   <img 
     id="zuzu-img"
     src="/zuzu.jpeg" 
@@ -25,44 +23,46 @@
 </div>
 
 <style>
-  /* Piksel resmin net kalmasını sağlar */
   .image-rendering-pixelated {
     image-rendering: pixelated;
     image-rendering: crisp-edges;
   }
 
-  /* Kaydırırken zıplama animasyonu */
   .walking {
     animation: zuzu-walk 0.2s infinite alternate ease-in-out;
   }
 
   @keyframes zuzu-walk {
-    0% { transform: translateY(0) rotate(0deg); }
-    100% { transform: translateY(-5px) rotate(4deg); }
+    0% {
+      transform: translateY(0) rotate(0deg);
+    }
+    100% {
+      transform: translateY(-5px) rotate(4deg);
+    }
   }
 </style>
 
-<script>
+<script is:inline>
   const zuzu = document.getElementById("zuzu-img");
   const bubble = document.getElementById("zuzu-bubble");
   let scrollTimeout;
 
-  // Sayfa kaydırıldıkça yürüsün/zıplasın
-  window.addEventListener("scroll", () => {
+  window.addEventListener("scroll", function () {
     if (zuzu) {
       zuzu.classList.add("walking");
       clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(() => {
+      scrollTimeout = setTimeout(function () {
         zuzu.classList.remove("walking");
       }, 150);
     }
   });
 
-  // Tıklanınca miyavlasın
-  zuzu?.addEventListener("click", () => {
-    if (bubble) {
+  if (zuzu && bubble) {
+    zuzu.addEventListener("click", function () {
       bubble.classList.remove("opacity-0");
-      setTimeout(() => bubble.classList.add("opacity-0"), 1500);
-    }
-  });
+      setTimeout(function () {
+        bubble.classList.add("opacity-0");
+      }, 1500);
+    });
+  }
 </script>
