@@ -6,25 +6,29 @@ import Footer from "@/components/Footer.astro";
 import LinkButton from "@/components/LinkButton.astro";
 import Card from "@/components/Card.astro";
 import Socials from "@/components/Socials.astro";
-import getSortedPosts from "@/utils/getSortedPosts";
-import config from "astro-paper.config";
+import { getSortedPosts } from "@/utils/getSortedPosts";
+import config from "../../astro-paper.config";
 
 const posts = await getCollection("blog");
-const sortedPosts = getSortedPosts(posts);
+const sortedPosts = await getSortedPosts(posts);
 const featuredPosts = sortedPosts.filter(({ data }) => data.featured);
 const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
 ---
 
 <Layout>
   <Header />
-  <main id="main-content">
-    <section id="hero">
-      <h1 class="mr-2">Hey, I'm {config.site.author} 👋</h1>
+  <main id="main-content" class="mx-auto w-full max-w-app px-4 pb-4">
+    <section id="hero" class="pb-6 pt-8">
+      <h1 class="my-4 inline-block text-3xl font-bold sm:my-8 sm:text-5xl">
+        Hey, I'm {config.site.author} 👋
+      </h1>
       <p class="my-4">
         {config.site.description}
       </p>
-      <div class="social-wrapper my-4">
-        <div class="social-links font-semibold">Social Links:</div>
+      <div class="social-wrapper my-4 flex flex-col sm:flex-row sm:items-center">
+        <div class="social-links mb-1 mr-2 whitespace-nowrap font-semibold sm:mb-0">
+          Social Links:
+        </div>
         <Socials />
       </div>
     </section>
@@ -81,18 +85,3 @@ const recentPosts = sortedPosts.filter(({ data }) => !data.featured);
   </main>
   <Footer />
 </Layout>
-
-<style>
-  #hero {
-    @apply pb-6 pt-8;
-  }
-  #hero h1 {
-    @apply my-4 inline-block text-3xl font-bold sm:my-8 sm:text-5xl;
-  }
-  .social-wrapper {
-    @apply flex flex-col sm:flex-row sm:items-center;
-  }
-  .social-links {
-    @apply mb-1 mr-2 whitespace-nowrap sm:mb-0;
-  }
-</style>

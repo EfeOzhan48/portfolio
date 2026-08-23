@@ -40,6 +40,7 @@
     "@tailwindcss/typography": "^0.5.20",
     "@types/lodash.kebabcase": "^4.1.9",
     "@typescript-eslint/parser": "^8.62.0",
+    "cookie": "^0.7.2",
     "eslint": "^10.6.0",
     "eslint-plugin-astro": "^2.1.1",
     "pagefind": "^1.5.2",

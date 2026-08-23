@@ -75,6 +75,9 @@ importers:
       '@typescript-eslint/parser':
         specifier: ^8.62.0
         version: 8.62.0(eslint@10.6.0(jiti@2.7.0))(typescript@6.0.3)
+      cookie:
+        specifier: ^0.7.2
+        version: 0.7.2
       eslint:
         specifier: ^10.6.0
         version: 10.6.0(jiti@2.7.0)
@@ -1725,6 +1728,10 @@ packages:
 
   cookie-es@1.2.3:
     resolution: {integrity: sha512-lXVyvUvrNXblMqzIRrxHb57UUVmqsSWlxqt3XIjCkUP0wDAf6uicO6KMbEgYrMNtEvWgWHwe42CKxPu9MYAnWw==}
+
+  cookie@0.7.2:
+    resolution: {integrity: sha512-yki5XnKuf750l50uGTllt6kKILY4nQ1eNIQatoXEByZ5dWgnKqbnqmTrBE5B4N7lrMJKQ2ytWMiTO2o0v6Ew/w==}
+    engines: {node: '>= 0.6'}
 
   cookie@1.1.1:
     resolution: {integrity: sha512-ei8Aos7ja0weRpFzJnEA9UHJ/7XQmqglbRwnf2ATjcB9Wq874VKH9kfjjirM6UhU2/E5fFYadylyhFldcqSidQ==}
@@ -4993,6 +5000,8 @@ snapshots:
   consola@3.4.2: {}
 
   cookie-es@1.2.3: {}
+
+  cookie@0.7.2: {}
 
   cookie@1.1.1: {}
 
