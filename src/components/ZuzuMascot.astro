@@ -3,22 +3,25 @@
 ---
 
 <div 
-  id="zuzu-wrapper" 
-  class="fixed bottom-4 right-4 z-50 select-none cursor-pointer group"
+  id="zuzu-container" 
+  class="fixed bottom-3 z-50 select-none cursor-pointer will-change-[transform,left]"
+  style="left: 50px; transition: transform 0.2s ease;"
   title="Zuzu'yu sevmek için tıkla!"
 >
+  <!-- Tıklanınca Çıkan Balon -->
   <div 
     id="zuzu-bubble" 
-    class="opacity-0 transition-opacity duration-200 absolute -top-8 right-0 bg-skin-card border border-skin-line text-skin-base text-[11px] font-mono px-2 py-1 rounded shadow whitespace-nowrap pointer-events-none"
+    class="opacity-0 transition-opacity duration-200 absolute -top-8 left-1/2 -translate-x-1/2 bg-skin-card border border-skin-line text-skin-base text-[11px] font-mono px-2 py-1 rounded shadow whitespace-nowrap pointer-events-none"
   >
     Miyav! 🐾
   </div>
 
+  <!-- Piksel Kedi -->
   <img 
-    id="zuzu-img"
-    src="/zuzu.jpeg" 
+    id="zuzu-cat"
+    src="/zuzu.png" 
     alt="Zuzu" 
-    class="w-14 h-14 object-contain image-rendering-pixelated drop-shadow-md transition-transform duration-200 hover:scale-110"
+    class="w-14 h-14 object-contain image-rendering-pixelated drop-shadow-md pointer-events-auto"
   />
 </div>
 
@@ -28,37 +31,78 @@
     image-rendering: crisp-edges;
   }
 
+  /* Yürürken hafif sekme animasyonu */
   .walking {
-    animation: zuzu-walk 0.2s infinite alternate ease-in-out;
+    animation: zuzu-step 0.22s infinite alternate ease-in-out;
   }
 
-  @keyframes zuzu-walk {
-    0% {
-      transform: translateY(0) rotate(0deg);
-    }
-    100% {
-      transform: translateY(-5px) rotate(4deg);
-    }
+  @keyframes zuzu-step {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-5px); }
+  }
+
+  /* Sola dönerken görseli yatayda aynalar */
+  .facing-left {
+    transform: scaleX(-1);
   }
 </style>
 
 <script is:inline>
-  const zuzu = document.getElementById("zuzu-img");
+  const container = document.getElementById("zuzu-container");
+  const cat = document.getElementById("zuzu-cat");
   const bubble = document.getElementById("zuzu-bubble");
-  let scrollTimeout;
 
-  window.addEventListener("scroll", function () {
-    if (zuzu) {
-      zuzu.classList.add("walking");
-      clearTimeout(scrollTimeout);
-      scrollTimeout = setTimeout(function () {
-        zuzu.classList.remove("walking");
-      }, 150);
+  let currentX = 50;
+  let targetX = 50;
+  let isMoving = false;
+  let direction = 1; // 1: sağa, -1: sola
+  let speed = 1.2;
+
+  // Yeni rastgele bir hedef nokta belirle
+  function pickNewTarget() {
+    const screenWidth = window.innerWidth;
+    const padding = 60;
+    targetX = Math.random() * (screenWidth - padding * 2) + padding;
+    direction = targetX > currentX ? 1 : -1;
+
+    // Yön değiştirme
+    if (direction === -1) {
+      cat.classList.add("facing-left");
+    } else {
+      cat.classList.remove("facing-left");
     }
-  });
 
-  if (zuzu && bubble) {
-    zuzu.addEventListener("click", function () {
+    isMoving = true;
+    cat.classList.add("walking");
+  }
+
+  // Volta atma döngüsü
+  function patrol() {
+    if (isMoving && container) {
+      const distance = targetX - currentX;
+
+      if (Math.abs(distance) < speed) {
+        currentX = targetX;
+        isMoving = false;
+        cat.classList.remove("walking");
+        // Vardığı yerde 2 ila 5 saniye dinlensin
+        setTimeout(pickNewTarget, Math.random() * 3000 + 2000);
+      } else {
+        currentX += direction * speed;
+      }
+      container.style.left = currentX + "px";
+    }
+    requestAnimationFrame(patrol);
+  }
+
+  // Başlat
+  setTimeout(pickNewTarget, 1000);
+  patrol();
+
+  // Tıklanınca konuşsun
+  if (cat && bubble) {
+    cat.addEventListener("click", function (e) {
+      e.stopPropagation();
       bubble.classList.remove("opacity-0");
       setTimeout(function () {
         bubble.classList.add("opacity-0");
