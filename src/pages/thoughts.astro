@@ -6,8 +6,11 @@ import Footer from "@/components/Footer.astro";
 import Card from "@/components/Card.astro";
 import { getSortedPosts } from "@/utils/getSortedPosts";
 
-const thoughts = await getCollection("thoughts");
-const sortedThoughts = getSortedPosts(thoughts);
+const posts = await getCollection("posts", ({ data }) => !data.draft);
+const thoughtPosts = posts.filter(({ data }) =>
+  data.tags.some(tag => tag.toLowerCase() === "thought" || tag.toLowerCase() === "thoughts")
+);
+const sortedThoughts = getSortedPosts(thoughtPosts);
 ---
 
 <Layout title="Thoughts | Durmuş Efe Özhan">
