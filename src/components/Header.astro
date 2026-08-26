@@ -167,10 +167,25 @@ const isActive = (path: string) => {
             </li>
           )
         }
+
+        <!-- Red/Orange Language Toggle Button -->
+        <li class="col-span-2 flex items-center justify-center sm:col-span-1">
+          <button
+            id="lang-toggle-btn"
+            class="flex items-center gap-1 rounded-md bg-gradient-to-r from-red-600 to-orange-500 px-2.5 py-1 text-xs font-bold text-white shadow-sm transition hover:from-red-700 hover:to-orange-600 hover:scale-105 active:scale-95"
+            aria-label="Toggle Language"
+            title="Dili Değiştir / Change Language"
+          >
+            <span id="lang-current">TR</span>
+          </button>
+        </li>
       </ul>
     </nav>
   </div>
 </header>
+
+<!-- Hidden Translate Container -->
+<div id="google_translate_element" style="display:none;"></div>
 
 <script>
   function toggleNav() {
@@ -232,3 +247,66 @@ const isActive = (path: string) => {
   handleSkipToContent();
   document.addEventListener("astro:after-swap", handleSkipToContent);
 </script>
+
+<script is:inline>
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement(
+      {
+        pageLanguage: 'en',
+        includedLanguages: 'en,tr',
+        autoDisplay: false
+      },
+      'google_translate_element'
+    );
+  }
+</script>
+
+<script is:inline src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
+
+<script is:inline>
+  const setLanguage = (lang) => {
+    if (lang === 'en') {
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname};`;
+      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${window.location.hostname};`;
+    } else {
+      document.cookie = `googtrans=/en/${lang}; path=/;`;
+      document.cookie = `googtrans=/en/${lang}; path=/; domain=${window.location.hostname};`;
+      document.cookie = `googtrans=/en/${lang}; path=/; domain=.${window.location.hostname};`;
+    }
+    location.reload();
+  };
+
+  const initLangToggle = () => {
+    const btn = document.getElementById("lang-toggle-btn");
+    const label = document.getElementById("lang-current");
+    if (!btn || !label) return;
+
+    const isTurkish = document.cookie.includes("googtrans=/en/tr");
+    label.innerText = isTurkish ? "EN" : "TR";
+
+    btn.onclick = () => {
+      const targetLang = label.innerText === "TR" ? "tr" : "en";
+      setLanguage(targetLang);
+    };
+  };
+
+  initLangToggle();
+  document.addEventListener("astro:after-swap", initLangToggle);
+</script>
+
+<style is:global>
+  /* Google Translate varsayılan üst çubuğunu ve araç ipuçlarını gizle */
+  .goog-te-banner-frame.skiptranslate,
+  .goog-te-banner-frame,
+  #goog-gt-tt,
+  .goog-te-balloon-frame {
+    display: none !important;
+  }
+  body {
+    top: 0px !important;
+  }
+  .skiptranslate iframe {
+    display: none !important;
+  }
+</style>
