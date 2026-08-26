@@ -81,7 +81,7 @@ const isActive = (path: string) => {
           <a
             href={getRelativeLocaleUrl(locale, "posts")}
             class:list={{ "active-nav": isActive("/posts") }}
-            data-i18n-nav="projects"
+            data-i18n-key="nav_projects"
           >
             Projects
           </a>
@@ -92,7 +92,7 @@ const isActive = (path: string) => {
           <a
             href={getRelativeLocaleUrl(locale, "thoughts")}
             class:list={{ "active-nav": isActive("/thoughts") }}
-            data-i18n-nav="thoughts"
+            data-i18n-key="nav_thoughts"
           >
             Thoughts
           </a>
@@ -103,7 +103,7 @@ const isActive = (path: string) => {
           <a
             href={getRelativeLocaleUrl(locale, "about")}
             class:list={{ "active-nav": isActive("/about") }}
-            data-i18n-nav="about"
+            data-i18n-key="nav_about"
           >
             {t.nav.about}
           </a>
@@ -171,7 +171,7 @@ const isActive = (path: string) => {
           )
         }
 
-        <!-- Ultra-Smooth Sliding Pill Switcher: ENG / TR -->
+        <!-- Modern Sliding Red/Orange Switcher: ENG / TR -->
         <li class="col-span-2 flex items-center justify-center sm:col-span-1">
           <div class="relative flex items-center rounded-full bg-neutral-200/90 p-0.5 dark:bg-neutral-800/90 border border-neutral-300 dark:border-neutral-700 shadow-inner">
             <div id="lang-slider" class="absolute top-0.5 left-0.5 h-[calc(100%-4px)] w-[34px] rounded-full bg-gradient-to-r from-red-600 to-orange-500 shadow transition-transform duration-200 ease-out"></div>
@@ -259,25 +259,76 @@ const isActive = (path: string) => {
 </script>
 
 <script is:inline>
-  // Sözlük (Navigasyon, başlıklar ve genel metinler)
-  const DICT = {
-    en: {
-      "projects": "Projects",
-      "thoughts": "Thoughts",
-      "about": "About",
-      "featured": "Featured",
-      "recent": "Recent Posts",
-      "all_posts": "All Posts"
-    },
-    tr: {
-      "projects": "Projeler",
-      "thoughts": "Düşünceler",
-      "about": "Hakkımda",
-      "featured": "Öne Çıkanlar",
-      "recent": "Son Yazılar",
-      "all_posts": "Tüm Projeler"
-    }
+  // Kapsamlı İçerik Çeviri Veritabanı
+  const EN_TO_TR_MAP = {
+    // Navigasyon & Arayüz
+    "Projects": "Projeler",
+    "Thoughts": "Düşünceler",
+    "About": "Hakkımda",
+    "Search": "Ara",
+    "Archives": "Arşiv",
+    "Recent Posts": "Son Projeler",
+    "Featured": "Öne Çıkanlar",
+    "All Posts": "Tüm Projeler",
+    "Table of contents": "İçindekiler",
+    "Back to Top": "Yukarı Dön",
+    "Share this post on:": "Yazıyı paylaş:",
+
+    // Post Detayları & Case Study Başlıkları
+    "Project Status: Prototype / Architectural Case Study (Discontinued)": "Proje Durumu: Prototip / Mimari Vaka İncelemesi (Durduruldu)",
+    "Project Status: Early Concept / Product Blueprint (Archived)": "Proje Durumu: Erken Konsept / Ürün Taslağı (Arşivlendi)",
+    "Project Status: Architectural Prototype / Archived Rails Application": "Proje Durumu: Mimari Prototip / Arşivlenmiş Rails Uygulaması",
+    
+    "Architectural Showcase": "Mimari Görseller & Arayüz",
+    "Technical Stack & Architecture": "Teknik Mimari ve Altyapı",
+    "Technical Stack & Full-Stack Architecture": "Teknik Mimari ve Full-Stack Altyapı",
+    "Backend API Architecture (Next.js 14)": "Backend API Mimarisi (Next.js 14)",
+    "Key Features & Value Proposition": "Güçlü Yönler ve Değer Önerisi",
+    "Core Features & Value Proposition": "Temel Özellikler ve Değer Önerisi",
+    "The Workflow Concept": "İş Akışı Konsepti",
+    "Core Product Workflow": "Temel Ürün İş Akışı",
+    "Critical Product Post-Mortem & Bottlenecks": "Kritik Ürün Analizi ve Pazarın Tıkandığı Noktalar",
+    "Product Post-Mortem & Strategic Pauses": "Ürün Analizi ve Durdurulma Sebepleri",
+    "Why Development Was Paused": "Geliştirmenin Durdurulma Sebepleri",
+    "Key Learnings": "Kazanılan Deneyimler",
+    "Source Code & Inquiries": "Kaynak Kodlar ve İletişim",
+    "Project Notes & Inquiries": "Proje Notları ve İletişim",
+
+    // YTAssist AI Çevirileri
+    "is a browser extension and micro-SaaS prototype engineered to integrate directly into the YouTube Studio dashboard. Its core purpose was to eliminate workflow context switching by providing creators with high-CTR video titles, 30-second retention hooks, descriptions, and thumbnail prompts right where they upload.":
+      "doğrudan YouTube Studio kontrol paneline entegre olacak şekilde tasarlanmış bir tarayıcı eklentisi ve mikro-SaaS prototipidir. Temel amacı, içerik üreticilerinin sekme değiştirmeden video yükledikleri ekranda yüksek tıklama oranına (CTR) sahip başlıklar, ilk 30 saniyelik kanca metinleri, SEO açıklamaları ve küçük resim istemleri üretmelerini sağlamaktı.",
+
+    "Zero Context Switching: Native DOM injection within YouTube Studio eliminates the need to switch tabs or open separate AI platforms.":
+      "Sıfır Sekme Değişimi: YouTube Studio içine doğrudan DOM entegrasyonu sayesinde harici sekmeler veya bağımsız yapay zeka araçları açma ihtiyacını ortadan kaldırır.",
+
+    "Micro-Subscription SaaS Model: Configured for low-friction recurring monetization ($0.99/mo) backed by automated Lemon Squeezy billing.":
+      "Mikro-Abonelik SaaS Modeli: Lemon Squeezy otomatik faturalandırma altyapısıyla desteklenen, düşük sürtünmeli aylık 0.99$ abonelik modeli.",
+
+    "Freemium Quota Management: Provided 5 free daily generation credits tracked via extension storage.":
+      "Freemium Kota Yönetimi: Eklenti hafızası üzerinden takip edilen günlük 5 adet ücretsiz üretim hakkı sunar.",
+
+    "Focused Prompt Engineering: Purpose-built system prompts tailored specifically for YouTube CTR, retention hooks, and search indexing.":
+      "Özelleştirilmiş İstem (Prompt) Mühendisliği: Genel yapay zeka çıktıları yerine özellikle YouTube tıklanma oranları, izleyici tutma metinleri ve SEO için optimize edilmiş şablonlar kullanır.",
+
+    // gmAI Çevirileri
+    "is a productivity-focused web application engineered to remove the friction of professional email communication. The platform allows users to input unformatted, shorthand thoughts without worrying about grammar or tone, transforming them into structured, recipient-tailored drafts with mandatory pre-send approval.":
+      "profesyonel e-posta iletişimindeki sürtünmeyi ortadan kaldırmak için tasarlanmış, üretkenlik odaklı bir web uygulamasıdır. Platform, kullanıcıların dil bilgisi veya üslup kaygısı gütmeden ham düşüncelerini girmelerine olanak tanır; bu girdileri alıcının rolüne göre uyarlanmış profesyonel taslaklara dönüştürür ve kullanıcı onayıyla gönderir.",
+
+    "Zero Cognitive Overhead: Users don't need to craft polite openers or correct typos; they just dump bullet points or raw text.":
+      "Sıfır Bilişsel Yük: Kullanıcıların resmi hitaplar veya imla kuralları için vakit harcamasına gerek kalmaz; sadece ham notlarını veya maddelerini yazmaları yeterlidir.",
+
+    "Intent & Recipient Context Mapping: Dynamic prompt templates that adapt based on the recipient's role (e.g., Academic Professor, Enterprise Client, Team Member).":
+      "Alıcı Rolü ve Bağlam Eşleme: Alıcının unvanına (ör. Akademik Danışman, Kurumsal Müşteri, Ekip Arkadaşı) göre hitap dilini otomatik uyarlayan dinamik prompt şablonları.",
+
+    "Human-in-the-Loop Safety Gate: Mandatory pre-send preview ensuring the user retains 100% control before any email is dispatched.":
+      "Kullanıcı Kontrol Kapısı: E-posta gönderilmeden önce zorunlu önizleme sunarak yapay zekanın kontrolsüz işlem yapmasını engeller ve tam kullanıcı denetimi sağlar."
   };
+
+  // Ters Çeviri Haritası (TR -> EN)
+  const TR_TO_EN_MAP = {};
+  for (const [en, tr] of Object.entries(EN_TO_TR_MAP)) {
+    TR_TO_EN_MAP[tr] = en;
+  }
 
   function updateSliderVisual(lang) {
     const slider = document.getElementById("lang-slider");
@@ -300,42 +351,51 @@ const isActive = (path: string) => {
     }
   }
 
-  function applyDOMTranslations(lang) {
-    const texts = DICT[lang] || DICT.en;
-    
-    // Menü bağlantılarını anında güncelle
-    document.querySelectorAll("[data-i18n-nav]").forEach((el) => {
-      const key = el.getAttribute("data-i18n-nav");
-      if (texts[key]) el.textContent = texts[key];
-    });
+  function translatePageDOM(lang) {
+    const isTr = lang === "tr";
+    const map = isTr ? EN_TO_TR_MAP : TR_TO_EN_MAP;
 
-    // Sayfa üzerindeki genel başlıkları anında güncelle
-    document.querySelectorAll("h2, h3, span, a").forEach((el) => {
-      const trimmed = el.textContent?.trim();
-      if (lang === "tr") {
-        if (trimmed === "Recent Posts") el.textContent = "Son Projeler";
-        if (trimmed === "Featured") el.textContent = "Öne Çıkanlar";
-        if (trimmed === "All Posts") el.textContent = "Tüm Yazılar";
-        if (trimmed === "Search") el.textContent = "Ara";
-      } else {
-        if (trimmed === "Son Projeler") el.textContent = "Recent Posts";
-        if (trimmed === "Öne Çıkanlar") el.textContent = "Featured";
-        if (trimmed === "Tüm Yazılar") el.textContent = "All Posts";
-        if (trimmed === "Ara") el.textContent = "Search";
+    // Sayfadaki tüm başlık, paragraf, liste ve buton metinlerini tara
+    const elements = document.querySelectorAll(
+      "h1, h2, h3, h4, p, li, blockquote, figcaption, [data-i18n-key]"
+    );
+
+    elements.forEach(el => {
+      // Kod blokları veya dil butonunu atla
+      if (el.closest("pre") || el.closest("code") || el.closest("#lang-slider") || el.id?.startsWith("btn-lang")) {
+        return;
+      }
+
+      const text = el.textContent?.trim();
+      if (!text) return;
+
+      // Tam eşleşme kontrolü
+      if (map[text]) {
+        el.textContent = map[text];
+        return;
+      }
+
+      // Paragraf içi kısmi cümle eşleştirmeleri
+      for (const [source, target] of Object.entries(map)) {
+        if (text.includes(source)) {
+          el.innerHTML = el.innerHTML.replace(source, target);
+        }
       }
     });
   }
 
-  function setLanguage(lang) {
-    localStorage.setItem("app_lang", lang);
+  function setAppLanguage(lang) {
+    localStorage.setItem("portfolio_lang", lang);
     updateSliderVisual(lang);
-    applyDOMTranslations(lang);
+    translatePageDOM(lang);
   }
 
-  function initLangSystem() {
-    const saved = localStorage.getItem("app_lang") || "en";
-    updateSliderVisual(saved);
-    applyDOMTranslations(saved);
+  function initLanguageEngine() {
+    const savedLang = localStorage.getItem("portfolio_lang") || "en";
+    updateSliderVisual(savedLang);
+    if (savedLang === "tr") {
+      translatePageDOM("tr");
+    }
 
     const btnEn = document.getElementById("btn-lang-en");
     const btnTr = document.getElementById("btn-lang-tr");
@@ -343,20 +403,20 @@ const isActive = (path: string) => {
     if (btnEn) {
       btnEn.onclick = (e) => {
         e.preventDefault();
-        setLanguage("en");
+        setAppLanguage("en");
       };
     }
 
     if (btnTr) {
       btnTr.onclick = (e) => {
         e.preventDefault();
-        setLanguage("tr");
+        setAppLanguage("tr");
       };
     }
   }
 
-  // Hem ilk açılışta hem Astro sayfa geçişlerinde anında çalıştır
-  initLangSystem();
-  document.addEventListener("astro:after-swap", initLangSystem);
-  document.addEventListener("astro:page-load", initLangSystem);
+  // İlk yüklemede ve Astro SPA sayfa geçişlerinde anında çalıştır
+  initLanguageEngine();
+  document.addEventListener("astro:after-swap", initLanguageEngine);
+  document.addEventListener("astro:page-load", initLanguageEngine);
 </script>
