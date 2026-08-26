@@ -57,3 +57,11 @@ Building this project provided immense technical and product development insight
 - **Chrome Extension Architecture:** Deep dive into Manifest V3, background service workers, content scripts, and secure storage.
 - **DOM Injection & Isolation:** Learned how to safely inject floating HUD components into complex, single-page application (SPA) environments like YouTube Studio without breaking host styling.
 - **Product Viability Validation:** Experiencing the full cycle from problem identification and UI prototyping to realistic economic and market viability analysis.
+
+---
+
+## 🔒 Source Code & Inquiries
+
+The codebase for this prototype is kept private as an internal case study. If you would like to discuss the architecture, Lemon Squeezy webhook workflows, or Groq API integration in detail, feel free to reach out:
+
+📫 **Contact:** [ozhanefe33@gmail.com](mailto:ozhanefe33@gmail.com)
