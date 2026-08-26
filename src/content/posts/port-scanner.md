@@ -1,48 +1,49 @@
 ---
 author: Durmuş Efe Özhan
-pubDatetime: 2026-07-15T12:00:00Z
-title: "Multi-Threaded CLI Port Scanner"
+pubDatetime: 2026-08-01T12:00:00Z
+title: "Multi-threaded Port Scanner & Banner Grabber in Python"
 featured: true
 draft: false
 tags:
   - python
+  - cybersecurity
   - networking
   - cli
-  - cybersecurity
-description: Fast, zero-dependency multi-threaded command line port scanner and service detection tool written in Python.
+  - multithreading
+description: A high-performance multi-threaded CLI port scanner with automated banner grabbing and flexible export formats.
 ---
 
-A lightweight, high-speed CLI port scanner built entirely in native Python with zero external third-party dependencies.
+A concurrent TCP port scanner and service banner grabber built with Python's `socket` and `concurrent.futures` modules, designed for authorized reconnaissance and network benchmarking.
+
+---
+
+## CLI Demonstration
+
+![Port Scanner CLI Demonstration](/projects/port-scanner-cli.png)
+*Figure: Active scan on scanme.nmap.org demonstrating concurrent port detection, banner retrieval (HTTP & SSH), and scan benchmarks.*
 
 ---
 
 ## Key Features
 
-- **Parallel Scanning:** Simultaneous socket connections across 100 concurrent worker threads.
-- **Service Detection:** Automatic identification of common services (SSH, HTTP, FTP, MySQL, etc.).
-- **Banner Grabbing:** Reads service headers and version banners on open ports.
-- **Flexible Targets:** Supports custom ranges, comma-separated lists, or a dedicated top-100 preset.
-- **Output Logging:** Export scan results directly to a text report.
+- **Concurrent Execution:** Configurable worker pool via `ThreadPoolExecutor` for fast multi-threaded scanning.
+- **Service Banner Grabbing:** Automatic service discovery and version identification across open TCP sockets.
+- **Flexible Targets & Ranges:** Supports single IPs, domains, explicit port lists (`-p 22,80,443`), top 100 ports, and custom ranges (`1-1024`).
+- **Export Formats:** Structured export capabilities to JSON and standard text logs.
 
 ---
 
 ## Usage Examples
 
 ```bash
-# Basic scan (Ports 1-1024)
-python port_scanner.py 192.168.1.1
-
-# Specific ports
-python port_scanner.py 192.168.1.1 -p 80,443,8080
-
-# Full range scan with custom workers and timeout
-python port_scanner.py 192.168.1.1 -p 1-65535 -w 500 -t 0.3
-
-# Scan top 100 most common ports
+# Scan Top 100 standard ports
 python port_scanner.py 192.168.1.1 --top100
 
-# Save results to a file
-python port_scanner.py 192.168.1.1 -o report.txt
+# Target specific ports with custom thread count and timeout
+python port_scanner.py scanme.nmap.org -p 22,80,443 -w 100 -t 1.0
+
+# Export results to JSON
+python port_scanner.py target.local -p 1-1024 -o scan_results.json
 
 ---
 
