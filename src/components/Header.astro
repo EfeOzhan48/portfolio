@@ -170,12 +170,12 @@ const isActive = (path: string) => {
 
         <!-- Modern Sliding Red/Orange Switcher: TR / ENG -->
         <li class="col-span-2 flex items-center justify-center sm:col-span-1">
-          <div class="lang-pill-wrapper relative flex items-center rounded-full bg-neutral-200/80 p-0.5 dark:bg-neutral-800/90 border border-neutral-300/50 dark:border-neutral-700/50 shadow-inner">
-            <!-- Animated Sliding Gradient Pill -->
+          <div class="relative flex items-center rounded-full bg-neutral-200/80 p-0.5 dark:bg-neutral-800/90 border border-neutral-300/50 dark:border-neutral-700/50 shadow-inner">
             <div id="lang-slider" class="absolute top-0.5 left-0.5 h-[calc(100%-4px)] w-[32px] rounded-full bg-gradient-to-r from-red-600 to-orange-500 shadow-md transition-all duration-300 ease-out"></div>
             
             <button
               id="btn-lang-en"
+              type="button"
               class="relative z-10 w-8 py-0.5 text-center font-mono text-[11px] font-bold transition-colors duration-200"
               aria-label="English"
             >
@@ -183,6 +183,7 @@ const isActive = (path: string) => {
             </button>
             <button
               id="btn-lang-tr"
+              type="button"
               class="relative z-10 w-8 py-0.5 text-center font-mono text-[11px] font-bold transition-colors duration-200"
               aria-label="Türkçe"
             >
@@ -275,31 +276,25 @@ const isActive = (path: string) => {
 <script is:inline src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <script is:inline>
-  const applyTranslate = (lang) => {
-    // 1. Kalıcı cookie tanımla (tüm alt yollar ve domain için)
-    if (lang === 'en') {
-      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname};`;
-      localStorage.setItem("preferred_lang", "en");
+  function setTranslateCookie(lang) {
+    const host = window.location.hostname;
+    if (lang === 'tr') {
+      document.cookie = `googtrans=/en/tr; path=/;`;
+      document.cookie = `googtrans=/en/tr; path=/; domain=${host};`;
+      document.cookie = `googtrans=/en/tr; path=/; domain=.${host};`;
+      localStorage.setItem("user_lang", "tr");
     } else {
-      document.cookie = `googtrans=/en/${lang}; path=/;`;
-      document.cookie = `googtrans=/en/${lang}; path=/; domain=${window.location.hostname};`;
-      localStorage.setItem("preferred_lang", lang);
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${host};`;
+      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${host};`;
+      localStorage.setItem("user_lang", "en");
     }
+  }
 
-    // 2. Selectbox tetiklemesi
-    const select = document.querySelector(".goog-te-combo");
-    if (select) {
-      select.value = lang;
-      select.dispatchEvent(new Event("change"));
-    }
-  };
-
-  const updateSwitcherUI = (lang) => {
+  function updateSlider(lang) {
     const slider = document.getElementById("lang-slider");
     const btnEn = document.getElementById("btn-lang-en");
     const btnTr = document.getElementById("btn-lang-tr");
-
     if (!slider || !btnEn || !btnTr) return;
 
     if (lang === "tr") {
@@ -315,52 +310,70 @@ const isActive = (path: string) => {
       btnTr.classList.remove("text-white");
       btnTr.classList.add("text-neutral-500", "dark:text-neutral-400");
     }
-  };
+  }
 
-  const initSwitchMechanics = () => {
-    const savedLang = localStorage.getItem("preferred_lang") || (document.cookie.includes("googtrans=/en/tr") ? "tr" : "en");
-    updateSwitcherUI(savedLang);
+  function applyLanguage(lang) {
+    setTranslateCookie(lang);
+    updateSlider(lang);
 
-    const btnEn = document.getElementById("btn-lang-en");
-    const btnTr = document.getElementById("btn-lang-tr");
-
-    if (btnEn) {
-      btnEn.onclick = (e) => {
-        e.preventDefault();
-        updateSwitcherUI("en");
-        applyTranslate("en");
-        if (document.cookie.includes("googtrans=/en/tr")) {
-          location.reload();
-        }
-      };
+    const select = document.querySelector(".goog-te-combo");
+    if (select) {
+      select.value = lang;
+      select.dispatchEvent(new Event("change"));
     }
+  }
 
-    if (btnTr) {
-      btnTr.onclick = (e) => {
-        e.preventDefault();
-        updateSwitcherUI("tr");
-        applyTranslate("tr");
-      };
-    }
+  function syncState() {
+    const currentLang = localStorage.getItem("user_lang") || (document.cookie.includes("googtrans=/en/tr") ? "tr" : "en");
+    updateSlider(currentLang);
 
-    // Sayfa geçişinde seçili dili Google Translate'e tekrar zorla
-    if (savedLang === "tr") {
-      const timer = setInterval(() => {
+    // Astro sayfa geçişi yaptıktan sonra Google Translate selectbox'ını yeni sayfaya zorla
+    if (currentLang === "tr") {
+      let attempts = 0;
+      const interval = setInterval(() => {
+        attempts++;
         const select = document.querySelector(".goog-te-combo");
         if (select) {
           if (select.value !== "tr") {
             select.value = "tr";
             select.dispatchEvent(new Event("change"));
           }
-          clearInterval(timer);
+          clearInterval(interval);
         }
-      }, 100);
-      setTimeout(() => clearInterval(timer), 3000);
+        if (attempts > 20) clearInterval(interval);
+      }, 50);
     }
-  };
+  }
 
-  initSwitchMechanics();
-  document.addEventListener("astro:after-swap", initSwitchMechanics);
+  function bindButtons() {
+    const btnEn = document.getElementById("btn-lang-en");
+    const btnTr = document.getElementById("btn-lang-tr");
+
+    if (btnEn) {
+      btnEn.onclick = (e) => {
+        e.preventDefault();
+        applyLanguage("en");
+        location.reload();
+      };
+    }
+
+    if (btnTr) {
+      btnTr.onclick = (e) => {
+        e.preventDefault();
+        applyLanguage("tr");
+      };
+    }
+  }
+
+  function initLanguageManager() {
+    syncState();
+    bindButtons();
+  }
+
+  // İlk yüklemede ve Astro'nun sayfa geçiş döngülerinde çalıştır
+  initLanguageManager();
+  document.addEventListener("astro:after-swap", initLanguageManager);
+  document.addEventListener("astro:page-load", initLanguageManager);
 </script>
 
 <style is:global>
