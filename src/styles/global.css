@@ -47,38 +47,34 @@
   scroll-margin-block: 1rem;
 }
 
-/* ===== 1. Sosyal Medya İkonları ve Link Hoverları (Kare Kutuyu Engeller) ===== */
-a,
-a svg {
-  transition: color 0.15s ease-in-out, stroke 0.15s ease-in-out, border-color 0.15s ease-in-out;
+/* ===== 1. Sosyal Medya İkonları ve Link Hoverları (Kare Çerçeveyi Engeller) ===== */
+a {
+  transition: color 0.15s ease-in-out, stroke 0.15s ease-in-out;
 }
 
 a:hover {
   color: #c084fc !important;
 }
 
-/* Çizgili SVG ikonlarının sadece hat rengini mor yap */
-a:hover svg,
-.group:hover svg,
-a:hover svg path,
-.group:hover svg path,
-a:hover svg circle,
-.group:hover svg circle {
+/* Yalnızca SVG ikonunun kendisinin rengini mor yap, çerçeve kutusu çizme */
+a:hover svg {
   color: #c084fc !important;
+}
+
+a:hover svg path,
+a:hover svg circle,
+.group:hover svg path,
+.group:hover svg circle {
   stroke: #c084fc !important;
 }
 
-/* SVG'nin kendi kutusuna fill basılmasını engelle, sadece dolu olan ikonların içini boya */
+/* GitHub vb. dolu ikonların iç dolgusunu mor yap */
 a:hover svg:not([fill="none"]) path {
   fill: #c084fc !important;
+  stroke: transparent !important;
 }
 
-a:hover .border-border,
-.group:hover .border-border {
-  border-color: #c084fc !important;
-}
-
-/* ===== 2. Tüm Butonlar (Mor Arka Plan + Net Beyaz Yazı ve İkon) ===== */
+/* ===== 2. Butonlar (Mor Arka Plan + Kesin Beyaz Yazı ve İkon) ===== */
 button,
 [role="button"],
 .btn-primary,
