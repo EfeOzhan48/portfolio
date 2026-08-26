@@ -264,17 +264,20 @@ const isActive = (path: string) => {
 <script is:inline src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <script is:inline>
-  const setLanguage = (lang) => {
-    if (lang === 'en') {
-      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname};`;
-      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=.${window.location.hostname};`;
+  const triggerGoogleTranslate = (lang) => {
+    const select = document.querySelector(".goog-te-combo");
+    if (select) {
+      select.value = lang;
+      select.dispatchEvent(new Event("change"));
     } else {
       document.cookie = `googtrans=/en/${lang}; path=/;`;
       document.cookie = `googtrans=/en/${lang}; path=/; domain=${window.location.hostname};`;
-      document.cookie = `googtrans=/en/${lang}; path=/; domain=.${window.location.hostname};`;
+      const frame = document.querySelector("iframe.goog-te-menu-frame");
+      if (frame && frame.contentWindow) {
+        const item = frame.contentWindow.document.querySelector(`.goog-te-menu2-item span[text='${lang}']`);
+        if (item) item.click();
+      }
     }
-    location.reload();
   };
 
   const initLangToggle = () => {
@@ -285,9 +288,24 @@ const isActive = (path: string) => {
     const isTurkish = document.cookie.includes("googtrans=/en/tr");
     label.innerText = isTurkish ? "EN" : "TR";
 
-    btn.onclick = () => {
-      const targetLang = label.innerText === "TR" ? "tr" : "en";
-      setLanguage(targetLang);
+    btn.onclick = (e) => {
+      e.preventDefault();
+      const currentText = label.innerText;
+
+      if (currentText === "TR") {
+        label.innerText = "EN";
+        triggerGoogleTranslate("tr");
+      } else {
+        label.innerText = "TR";
+        const select = document.querySelector(".goog-te-combo");
+        if (select) {
+          select.value = "en";
+          select.dispatchEvent(new Event("change"));
+        }
+        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+        document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname};`;
+        location.reload();
+      }
     };
   };
 
