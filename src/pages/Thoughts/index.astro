@@ -1,0 +1,32 @@
+---
+import { getCollection } from "astro:content";
+import Layout from "@/layouts/Layout.astro";
+import Header from "@/components/Header.astro";
+import Footer from "@/components/Footer.astro";
+import Card from "@/components/Card.astro";
+import { getSortedPosts } from "@/utils/getSortedPosts";
+
+const thoughts = await getCollection("thoughts");
+const sortedThoughts = getSortedPosts(thoughts);
+---
+
+<Layout title="Thoughts | Durmuş Efe Özhan">
+  <Header activeNav="thoughts" />
+  <main id="main-content" class="app-layout mx-auto w-full max-w-app px-4 pb-12">
+    <section class="pt-8 pb-4">
+      <h1 class="text-3xl font-bold tracking-tight">Thoughts & Notes</h1>
+      <p class="mt-2 text-muted-foreground">Personal reflections, daily thoughts, ideas, and engineering notes.</p>
+    </section>
+
+    <ul class="mt-6">
+      {sortedThoughts.length > 0 ? (
+        sortedThoughts.map(data => (
+          <Card variant="h3" {...data} />
+        ))
+      ) : (
+        <p class="text-sm text-muted-foreground mt-4">No thoughts published yet.</p>
+      )}
+    </ul>
+  </main>
+  <Footer />
+</Layout>
