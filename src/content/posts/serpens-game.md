@@ -19,9 +19,25 @@ This project revamps the classic arcade snake game with 5 escalating challenge t
 
 ---
 
+## Screenshots
+
+![Serpens Start Screen](/assets/projects/serpens-game-start-screen.png)
+*Figure 1: Player profile entry and persistent session initialization.*
+
+![Serpens Gameplay Level 1](/assets/projects/serpens-game-screen.png)
+*Figure 2: Level 1 classic arcade mode with target tracking and active HUD.*
+
+![Serpens Level 3 Obstacles](/assets/projects/serpens-game-level-3-screen.png)
+*Figure 3: Level 3 introducing complex static obstacle barriers.*
+
+![Serpens Game Over & Checkpoint](/assets/projects/serpens-game-game-over-screen.png)
+*Figure 4: Active checkpoint restart system.*
+
+---
+
 ## Gameplay & Controls
 
-Collect food items to reach the level target. Hitting walls or your own tail ends the game.
+Collect food items to reach the level target. Hitting walls, obstacles, or your own tail ends the round.
 
 | Key | Action |
 | :--- | :--- |
@@ -63,10 +79,12 @@ pip install pygame
 # Run game
 python serpens_game.py
 
----
+Requirements
+-Python 3.x
+-pygame
+-PressStart2P-Regular.ttf (Included in repository)
 
-## 📦 Repository & Source Code
-
+📦 Repository & Source Code
 Source code, assets, and documentation are available on GitHub:
 
-👉 [https://github.com/EfeOzhan48/serpens-game](https://github.com/EfeOzhan48/serpens-game)
+👉 https://github.com/EfeOzhan48/serpens-game
