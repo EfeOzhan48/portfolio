@@ -1,6 +1,6 @@
 ---
-author: "Durmuş Efe Özhan"
-pubDatetime: 2026-07-15T10:00:00Z
+author: Durmuş Efe Özhan
+pubDatetime: 2026-07-15T12:00:00Z
 title: "Multi-Threaded CLI Port Scanner"
 featured: true
 draft: false
@@ -9,7 +9,7 @@ tags:
   - networking
   - cli
   - cybersecurity
-description: "Fast, zero-dependency multi-threaded command line port scanner and service detection tool written in Python."
+description: Fast, zero-dependency multi-threaded command line port scanner and service detection tool written in Python.
 ---
 
 A lightweight, high-speed CLI port scanner built entirely in native Python with zero external third-party dependencies.
@@ -43,19 +43,3 @@ python port_scanner.py 192.168.1.1 --top100
 
 # Save results to a file
 python port_scanner.py 192.168.1.1 -o report.txt
-
----'''
-
-<hr class="my-6 border-dashed border-border" />
-
-### 📦 Repository & Source Code
-You can find the full source code, CLI documentation, and usage examples on GitHub:
-
-<a 
-  href="https://github.com/EfeOzhan48/port-scanner" 
-  target="_blank" 
-  rel="noopener noreferrer"
-  class="inline-flex items-center gap-2 px-4 py-2 mt-3 font-mono text-sm font-semibold rounded-md border border-accent bg-accent/10 text-accent hover:bg-accent hover:text-background transition-all no-underline"
->
-  <span>🐙 View Project on GitHub →</span>
-</a>
