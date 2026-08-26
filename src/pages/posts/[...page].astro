@@ -1,7 +1,6 @@
 ---
 import type { GetStaticPaths } from "astro";
 import { getCollection } from "astro:content";
-import Main from "@/layouts/Main.astro";
 import Layout from "@/layouts/Layout.astro";
 import Header from "@/components/Header.astro";
 import Footer from "@/components/Footer.astro";
@@ -11,7 +10,7 @@ import { getSortedPosts } from "@/utils/getSortedPosts";
 import config from "@/config";
 
 export const getStaticPaths = (async ({ paginate }) => {
-  // 'thoughts' etiketli yazıları Projects listesinden hariç tutuyoruz
+  // 'thoughts' etiketini hariç tutarak sadece projeleri alıyoruz
   const posts = await getCollection("posts", ({ data }) => {
     const isDraft = Boolean(data.draft);
     const isThought = data.tags?.some((tag: string) =>
@@ -30,11 +29,16 @@ const { page } = Astro.props;
 
 <Layout title={`Projects | ${config.site.title}`}>
   <Header activeNav="posts" />
-  <Main pageTitle="Projects" pageDesc="All the projects and open-source works.">
-    <ul>
+  <main id="main-content" class="app-layout mx-auto w-full max-w-app px-4 pb-12">
+    <section class="pt-8 pb-4">
+      <h1 class="text-3xl font-bold tracking-tight">Projects</h1>
+      <p class="mt-2 text-muted-foreground">All the projects and open-source works.</p>
+    </section>
+
+    <ul class="mt-6">
       {page.data.map(post => <Card {...post} />)}
     </ul>
-  </Main>
+  </main>
 
   <Pagination {page} />
 
