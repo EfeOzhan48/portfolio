@@ -25,12 +25,6 @@
     @apply outline-accent outline-offset-1 focus-visible:no-underline focus-visible:outline-2 focus-visible:outline-dashed;
   }
 
-  /* Link üzerine gelince mor ışıma */
-  a:hover {
-    color: var(--accent-purple, #c084fc);
-    transition: color 0.15s ease-in-out;
-  }
-
   button:not(:disabled),
   [role="button"]:not(:disabled) {
     cursor: pointer;
@@ -51,4 +45,35 @@
 
 :target {
   scroll-margin-block: 1rem;
+}
+
+/* ===== Global Mor Hover & İkon Geçişleri ===== */
+a, button, [role="button"] {
+  transition: color 0.15s ease-in-out, stroke 0.15s ease-in-out, fill 0.15s ease-in-out;
+}
+
+a:hover,
+button:hover {
+  color: #c084fc !important;
+}
+
+/* Sosyal Medya, Butonlar ve Linklerdeki Tüm SVG İkonları */
+a:hover svg,
+button:hover svg,
+.group:hover svg,
+a:hover svg path,
+button:hover svg path,
+.group:hover svg path,
+a:hover svg circle,
+button:hover svg circle,
+.group:hover svg circle {
+  color: #c084fc !important;
+  stroke: #c084fc !important;
+  fill: #c084fc !important;
+}
+
+/* Çizgili kenarlık hoverları */
+a:hover .border-border,
+.group:hover .border-border {
+  border-color: #c084fc !important;
 }
