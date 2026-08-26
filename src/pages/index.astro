@@ -174,15 +174,39 @@ const homePath = getRelativeLocaleUrl(locale, "");
         </div>
 
         <!-- Sağ Taraf: Form Kartı -->
-        <div class="md:col-span-7 bg-muted/30 p-5 sm:p-6 rounded-2xl border border-border shadow-md">
+        <div class="md:col-span-7 bg-muted/30 p-5 sm:p-6 rounded-2xl border border-border shadow-md relative">
+          <!-- Başarı Bildirim Kartı (İlk başta gizli) -->
+          <div 
+            id="form-success-message" 
+            class="hidden flex-col items-center justify-center text-center p-6 py-10 bg-background/90 rounded-xl border border-[var(--accent-purple,#c084fc)] animate-fade-in"
+          >
+            <div class="w-12 h-12 rounded-full bg-[var(--accent-purple,#c084fc)]/20 text-[var(--accent-purple,#c084fc)] flex items-center justify-center mb-3">
+              <svg class="w-6 h-6 stroke-[var(--accent-purple,#c084fc)]" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2.5">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7" />
+              </svg>
+            </div>
+            <h3 class="text-lg font-bold text-foreground">Mesajınız Gönderildi! 🎉</h3>
+            <p class="text-xs text-muted-foreground mt-1 max-w-xs">
+              En kısa sürede e-posta adresiniz üzerinden geri dönüş sağlayacağım.
+            </p>
+            <button 
+              id="send-another-btn" 
+              type="button" 
+              class="mt-5 text-xs text-accent hover:text-[var(--accent-purple,#c084fc)] underline uppercase tracking-wider font-semibold cursor-pointer"
+            >
+              Yeni Mesaj Gönder
+            </button>
+          </div>
+
+          <!-- İletişim Formu -->
           <form 
+            id="contact-form"
             action="https://formspree.io/f/xgawgjbk" 
             method="POST" 
             class="flex flex-col gap-3.5"
           >
-            <!-- Gmail Başlığı ve Otomatik Yanıt Parametreleri -->
+            <!-- Gmail Başlığı -->
             <input type="hidden" name="_subject" value="🚀 efeozhan.dev üzerinden yeni iletişim mesajı!" />
-            <input type="hidden" name="_replyto" value="%email%" />
 
             <div>
               <label for="name" class="block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1">Your Name</label>
@@ -221,11 +245,12 @@ const homePath = getRelativeLocaleUrl(locale, "");
             </div>
 
             <button 
+              id="submit-btn"
               type="submit" 
-              class="group mt-1 w-full sm:w-auto self-start flex items-center justify-center gap-2 bg-accent text-accent-foreground px-5 py-2.5 rounded-lg font-semibold text-xs tracking-wider uppercase hover:!bg-[var(--accent-purple,#c084fc)] active:scale-95 transition-all shadow cursor-pointer"
+              class="group mt-1 w-full sm:w-auto self-start flex items-center justify-center gap-2 bg-accent text-accent-foreground px-5 py-2.5 rounded-lg font-semibold text-xs tracking-wider uppercase hover:!bg-[var(--accent-purple,#c084fc)] active:scale-95 transition-all shadow cursor-pointer disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              <span class="group-hover:!text-white transition-colors">SEND MESSAGE</span>
-              <svg class="w-3.5 h-3.5 stroke-current group-hover:!stroke-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <span id="btn-text" class="group-hover:!text-white transition-colors">SEND MESSAGE</span>
+              <svg id="btn-icon" class="w-3.5 h-3.5 stroke-current group-hover:!stroke-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </button>
@@ -238,9 +263,59 @@ const homePath = getRelativeLocaleUrl(locale, "");
 </Layout>
 
 <script>
+  function setupContactForm() {
+    const form = document.getElementById("contact-form") as HTMLFormElement | null;
+    const successBox = document.getElementById("form-success-message");
+    const sendAnotherBtn = document.getElementById("send-another-btn");
+    const submitBtn = document.getElementById("submit-btn") as HTMLButtonElement | null;
+    const btnText = document.getElementById("btn-text");
+
+    if (!form || !successBox || !submitBtn || !btnText) return;
+
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      
+      // Butonu yükleniyor durumuna al
+      submitBtn.disabled = true;
+      btnText.textContent = "SENDING...";
+
+      const formData = new FormData(form);
+
+      try {
+        const response = await fetch(form.action, {
+          method: "POST",
+          body: formData,
+          headers: {
+            "Accept": "application/json"
+          }
+        });
+
+        if (response.ok) {
+          form.reset();
+          form.classList.add("hidden");
+          successBox.classList.remove("hidden");
+          successBox.classList.add("flex");
+        } else {
+          alert("Mesaj gönderilirken bir hata oluştu. Lütfen tekrar deneyin.");
+        }
+      } catch (err) {
+        alert("Bağlantı hatası. Lütfen internetinizi kontrol edin.");
+      } finally {
+        submitBtn.disabled = false;
+        btnText.textContent = "SEND MESSAGE";
+      }
+    });
+
+    sendAnotherBtn?.addEventListener("click", () => {
+      successBox.classList.add("hidden");
+      successBox.classList.remove("flex");
+      form.classList.remove("hidden");
+    });
+  }
+
   document.addEventListener("astro:page-load", () => {
-    const indexLayout = (document.querySelector("#main-content") as HTMLElement)
-      ?.dataset;
+    setupContactForm();
+    const indexLayout = (document.querySelector("#main-content") as HTMLElement)?.dataset;
     const baseRoot = import.meta.env.BASE_URL.replace(/\/?$/, "/");
     if (indexLayout?.layout) {
       sessionStorage.setItem("backUrl", indexLayout.homePath ?? baseRoot);
