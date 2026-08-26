@@ -7,9 +7,12 @@ import Card from "@/components/Card.astro";
 import { getSortedPosts } from "@/utils/getSortedPosts";
 
 const posts = await getCollection("posts", ({ data }) => !data.draft);
+
+// 'thoughts' etiketli yazıları filtrele
 const thoughtPosts = posts.filter(({ data }) =>
-  data.tags.some(tag => tag.toLowerCase() === "thought" || tag.toLowerCase() === "thoughts")
+  data.tags && data.tags.some(tag => tag.toLowerCase().includes("thought"))
 );
+
 const sortedThoughts = getSortedPosts(thoughtPosts);
 ---
 

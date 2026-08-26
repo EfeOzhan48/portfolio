@@ -1,6 +1,6 @@
 ---
 author: "Durmuş Efe Özhan"
-pubDatetime: 2026-08-26T15:30:00Z
+pubDatetime: 2026-08-01T12:00:00Z
 title: "Starting My Thoughts & Notes Log"
 featured: false
 draft: false

@@ -70,5 +70,9 @@ pygame
 
 PressStart2P-Regular.ttf (Included in repository)
 
-Source Code
-GitHub: github.com/EfeOzhan48/serpens
+---
+
+### 📦 Repository & Source Code
+You can find the full source code, pixel assets, and installation steps on GitHub:
+
+👉 **[View Project on GitHub →](https://github.com/EfeOzhan48/serpens)**
