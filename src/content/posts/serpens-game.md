@@ -69,4 +69,4 @@ python serpens_game.py
 
 Source code, assets, and documentation are available on GitHub:
 
-👉 [https://github.com/EfeOzhan48/serpens](https://github.com/EfeOzhan48/serpens)
+👉 [https://github.com/EfeOzhan48/serpens-game](https://github.com/EfeOzhan48/serpens-game)
