@@ -47,33 +47,57 @@
   scroll-margin-block: 1rem;
 }
 
-/* ===== Global Mor Hover & İkon Geçişleri ===== */
-a, button, [role="button"] {
-  transition: color 0.15s ease-in-out, stroke 0.15s ease-in-out, fill 0.15s ease-in-out;
+/* ===== 1. Sosyal Medya İkonları ve Link Hoverları (Kare Kutuyu Engeller) ===== */
+a,
+a svg {
+  transition: color 0.15s ease-in-out, stroke 0.15s ease-in-out, border-color 0.15s ease-in-out;
 }
 
-a:hover,
-button:hover {
+a:hover {
   color: #c084fc !important;
 }
 
-/* Sosyal Medya, Butonlar ve Linklerdeki Tüm SVG İkonları */
+/* Çizgili SVG ikonlarının sadece hat rengini mor yap */
 a:hover svg,
-button:hover svg,
 .group:hover svg,
 a:hover svg path,
-button:hover svg path,
 .group:hover svg path,
 a:hover svg circle,
-button:hover svg circle,
 .group:hover svg circle {
   color: #c084fc !important;
   stroke: #c084fc !important;
+}
+
+/* SVG'nin kendi kutusuna fill basılmasını engelle, sadece dolu olan ikonların içini boya */
+a:hover svg:not([fill="none"]) path {
   fill: #c084fc !important;
 }
 
-/* Çizgili kenarlık hoverları */
 a:hover .border-border,
 .group:hover .border-border {
   border-color: #c084fc !important;
+}
+
+/* ===== 2. Tüm Butonlar (Mor Arka Plan + Net Beyaz Yazı ve İkon) ===== */
+button,
+[role="button"],
+.btn-primary,
+button[type="submit"] {
+  transition: background-color 0.15s ease-in-out, color 0.15s ease-in-out, transform 0.15s ease-in-out;
+}
+
+button:hover,
+[role="button"]:hover,
+.btn-primary:hover,
+button[type="submit"]:hover {
+  background-color: #a855f7 !important;
+  color: #ffffff !important;
+}
+
+button:hover *,
+[role="button"]:hover *,
+.btn-primary:hover *,
+button[type="submit"]:hover * {
+  color: #ffffff !important;
+  stroke: #ffffff !important;
 }
