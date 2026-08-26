@@ -44,7 +44,7 @@ python port_scanner.py 192.168.1.1 --top100
 # Save results to a file
 python port_scanner.py 192.168.1.1 -o report.txt
 
----
+---'''
 
 <hr class="my-6 border-dashed border-border" />
 
