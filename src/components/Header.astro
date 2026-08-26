@@ -168,16 +168,27 @@ const isActive = (path: string) => {
           )
         }
 
-        <!-- Red/Orange Language Toggle Button -->
+        <!-- Modern Sliding Red/Orange Switcher: TR / ENG -->
         <li class="col-span-2 flex items-center justify-center sm:col-span-1">
-          <button
-            id="lang-toggle-btn"
-            class="flex items-center gap-1 rounded-md bg-gradient-to-r from-red-600 to-orange-500 px-2.5 py-1 text-xs font-bold text-white shadow-sm transition hover:from-red-700 hover:to-orange-600 hover:scale-105 active:scale-95"
-            aria-label="Toggle Language"
-            title="Dili Değiştir / Change Language"
-          >
-            <span id="lang-current">TR</span>
-          </button>
+          <div class="lang-pill-wrapper relative flex items-center rounded-full bg-neutral-200/80 p-0.5 dark:bg-neutral-800/90 border border-neutral-300/50 dark:border-neutral-700/50 shadow-inner">
+            <!-- Animated Sliding Gradient Pill -->
+            <div id="lang-slider" class="absolute top-0.5 left-0.5 h-[calc(100%-4px)] w-[32px] rounded-full bg-gradient-to-r from-red-600 to-orange-500 shadow-md transition-all duration-300 ease-out"></div>
+            
+            <button
+              id="btn-lang-en"
+              class="relative z-10 w-8 py-0.5 text-center font-mono text-[11px] font-bold transition-colors duration-200"
+              aria-label="English"
+            >
+              ENG
+            </button>
+            <button
+              id="btn-lang-tr"
+              class="relative z-10 w-8 py-0.5 text-center font-mono text-[11px] font-bold transition-colors duration-200"
+              aria-label="Türkçe"
+            >
+              TR
+            </button>
+          </div>
         </li>
       </ul>
     </nav>
@@ -264,53 +275,92 @@ const isActive = (path: string) => {
 <script is:inline src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
 
 <script is:inline>
-  const triggerGoogleTranslate = (lang) => {
+  const applyTranslate = (lang) => {
+    // 1. Kalıcı cookie tanımla (tüm alt yollar ve domain için)
+    if (lang === 'en') {
+      document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+      document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname};`;
+      localStorage.setItem("preferred_lang", "en");
+    } else {
+      document.cookie = `googtrans=/en/${lang}; path=/;`;
+      document.cookie = `googtrans=/en/${lang}; path=/; domain=${window.location.hostname};`;
+      localStorage.setItem("preferred_lang", lang);
+    }
+
+    // 2. Selectbox tetiklemesi
     const select = document.querySelector(".goog-te-combo");
     if (select) {
       select.value = lang;
       select.dispatchEvent(new Event("change"));
-    } else {
-      document.cookie = `googtrans=/en/${lang}; path=/;`;
-      document.cookie = `googtrans=/en/${lang}; path=/; domain=${window.location.hostname};`;
-      const frame = document.querySelector("iframe.goog-te-menu-frame");
-      if (frame && frame.contentWindow) {
-        const item = frame.contentWindow.document.querySelector(`.goog-te-menu2-item span[text='${lang}']`);
-        if (item) item.click();
-      }
     }
   };
 
-  const initLangToggle = () => {
-    const btn = document.getElementById("lang-toggle-btn");
-    const label = document.getElementById("lang-current");
-    if (!btn || !label) return;
+  const updateSwitcherUI = (lang) => {
+    const slider = document.getElementById("lang-slider");
+    const btnEn = document.getElementById("btn-lang-en");
+    const btnTr = document.getElementById("btn-lang-tr");
 
-    const isTurkish = document.cookie.includes("googtrans=/en/tr");
-    label.innerText = isTurkish ? "EN" : "TR";
+    if (!slider || !btnEn || !btnTr) return;
 
-    btn.onclick = (e) => {
-      e.preventDefault();
-      const currentText = label.innerText;
-
-      if (currentText === "TR") {
-        label.innerText = "EN";
-        triggerGoogleTranslate("tr");
-      } else {
-        label.innerText = "TR";
-        const select = document.querySelector(".goog-te-combo");
-        if (select) {
-          select.value = "en";
-          select.dispatchEvent(new Event("change"));
-        }
-        document.cookie = "googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
-        document.cookie = `googtrans=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/; domain=${window.location.hostname};`;
-        location.reload();
-      }
-    };
+    if (lang === "tr") {
+      slider.style.transform = "translateX(32px)";
+      btnTr.classList.add("text-white");
+      btnTr.classList.remove("text-neutral-500", "dark:text-neutral-400");
+      btnEn.classList.remove("text-white");
+      btnEn.classList.add("text-neutral-500", "dark:text-neutral-400");
+    } else {
+      slider.style.transform = "translateX(0px)";
+      btnEn.classList.add("text-white");
+      btnEn.classList.remove("text-neutral-500", "dark:text-neutral-400");
+      btnTr.classList.remove("text-white");
+      btnTr.classList.add("text-neutral-500", "dark:text-neutral-400");
+    }
   };
 
-  initLangToggle();
-  document.addEventListener("astro:after-swap", initLangToggle);
+  const initSwitchMechanics = () => {
+    const savedLang = localStorage.getItem("preferred_lang") || (document.cookie.includes("googtrans=/en/tr") ? "tr" : "en");
+    updateSwitcherUI(savedLang);
+
+    const btnEn = document.getElementById("btn-lang-en");
+    const btnTr = document.getElementById("btn-lang-tr");
+
+    if (btnEn) {
+      btnEn.onclick = (e) => {
+        e.preventDefault();
+        updateSwitcherUI("en");
+        applyTranslate("en");
+        if (document.cookie.includes("googtrans=/en/tr")) {
+          location.reload();
+        }
+      };
+    }
+
+    if (btnTr) {
+      btnTr.onclick = (e) => {
+        e.preventDefault();
+        updateSwitcherUI("tr");
+        applyTranslate("tr");
+      };
+    }
+
+    // Sayfa geçişinde seçili dili Google Translate'e tekrar zorla
+    if (savedLang === "tr") {
+      const timer = setInterval(() => {
+        const select = document.querySelector(".goog-te-combo");
+        if (select) {
+          if (select.value !== "tr") {
+            select.value = "tr";
+            select.dispatchEvent(new Event("change"));
+          }
+          clearInterval(timer);
+        }
+      }, 100);
+      setTimeout(() => clearInterval(timer), 3000);
+    }
+  };
+
+  initSwitchMechanics();
+  document.addEventListener("astro:after-swap", initSwitchMechanics);
 </script>
 
 <style is:global>
