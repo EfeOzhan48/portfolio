@@ -33,7 +33,7 @@ const homePath = getRelativeLocaleUrl(locale, "");
     data-home-path={homePath}
     class="app-layout my-1 mx-auto w-full max-w-app px-4"
   >
-    <!-- 1. HERO BÖLÜMÜ (Sadece Yazılar ve Sosyal Linkler) -->
+    <!-- 1. HERO BÖLÜMÜ -->
     <section id="hero" class="border-border border-b pt-8 pb-6">
       <h1 class="my-4 inline-block text-4xl font-bold sm:my-8 sm:text-5xl">
         Hey, I'm Durmuş Efe Özhan 👋
@@ -180,6 +180,10 @@ const homePath = getRelativeLocaleUrl(locale, "");
             method="POST" 
             class="flex flex-col gap-3.5"
           >
+            <!-- Gmail Başlığı ve Otomatik Yanıt Parametreleri -->
+            <input type="hidden" name="_subject" value="🚀 efeozhan.dev üzerinden yeni iletişim mesajı!" />
+            <input type="hidden" name="_replyto" value="%email%" />
+
             <div>
               <label for="name" class="block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground mb-1">Your Name</label>
               <input 
@@ -218,10 +222,10 @@ const homePath = getRelativeLocaleUrl(locale, "");
 
             <button 
               type="submit" 
-              class="mt-1 w-full sm:w-auto self-start flex items-center justify-center gap-2 bg-accent text-accent-foreground px-5 py-2 rounded-lg font-semibold text-xs tracking-wider uppercase hover:bg-[var(--accent-purple,#c084fc)] active:scale-95 transition-all shadow cursor-pointer"
+              class="group mt-1 w-full sm:w-auto self-start flex items-center justify-center gap-2 bg-accent text-accent-foreground px-5 py-2.5 rounded-lg font-semibold text-xs tracking-wider uppercase hover:!bg-[var(--accent-purple,#c084fc)] active:scale-95 transition-all shadow cursor-pointer"
             >
-              <span>SEND MESSAGE</span>
-              <svg class="w-3.5 h-3.5" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
+              <span class="group-hover:!text-white transition-colors">SEND MESSAGE</span>
+              <svg class="w-3.5 h-3.5 stroke-current group-hover:!stroke-white transition-colors" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2">
                 <path stroke-linecap="round" stroke-linejoin="round" d="M14 5l7 7m0 0l-7 7m7-7H3" />
               </svg>
             </button>
