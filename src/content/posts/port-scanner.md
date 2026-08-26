@@ -43,3 +43,11 @@ python port_scanner.py 192.168.1.1 --top100
 
 # Save results to a file
 python port_scanner.py 192.168.1.1 -o report.txt
+
+---
+
+## 📦 Repository & Source Code
+
+Source code and CLI documentation are available on GitHub:
+
+👉 [https://github.com/EfeOzhan48/port-scanner](https://github.com/EfeOzhan48/port-scanner)

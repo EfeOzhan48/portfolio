@@ -62,3 +62,11 @@ pip install pygame
 
 # Run game
 python serpens_game.py
+
+---
+
+## 📦 Repository & Source Code
+
+Source code, assets, and documentation are available on GitHub:
+
+👉 [https://github.com/EfeOzhan48/serpens](https://github.com/EfeOzhan48/serpens)
