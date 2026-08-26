@@ -24,14 +24,17 @@ This project revamps the classic arcade snake game with 5 escalating challenge t
 ![Serpens Start Screen](/projects/serpens-game-start-screen.png)
 *Figure 1: Player profile entry and persistent session initialization.*
 
+![Serpens Level Transition Screen](/projects/serpens-game-level-screen.png)
+*Figure 2: Level transition and countdown screen.*
+
 ![Serpens Gameplay Level 1](/projects/serpens-game-screen.png)
-*Figure 2: Level 1 classic arcade mode with target tracking and active HUD.*
+*Figure 3: Level 1 classic arcade mode with target tracking and active HUD.*
 
 ![Serpens Level 3 Obstacles](/projects/serpens-game-level-3-screen.png)
-*Figure 3: Level 3 introducing complex static obstacle barriers.*
+*Figure 4: Level 3 introducing complex static obstacle barriers.*
 
 ![Serpens Game Over & Checkpoint](/projects/serpens-game-game-over-screen.png)
-*Figure 4: Active checkpoint restart system.*
+*Figure 5: Active checkpoint restart system.*
 
 ---
 
