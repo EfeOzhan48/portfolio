@@ -114,5 +114,5 @@ SmartPot-IO is planned as a fully open-source hardware and software ecosystem.
 
 * 🐙 **Source Code:** [GitHub - SmartPot-IO](https://github.com/EfeOzhan48/SmartPot-IO)
 * ⚡ **Live Circuit Simulation:** [Run on Wokwi](https://wokwi.com/projects/473148814433475585)
-* 👤 **Durmuş Efe Özhan:** [efeozhan.dev](https://www.efeozhan.dev) • [LinkedIn](https://www.linkedin.com/in/durmu%C5%9F-efe-%C3%B6zhan-720a46325/)
+* 👤 **Durmuş Efe Özhan:** [LinkedIn](https://www.linkedin.com/in/ • [github](https://github.com/EfeOzhan48) durmu%C5%9F-efe-%C3%B6zhan-720a46325/)
 * 🎨 **Batu Taşkesen:** [LinkedIn](https://www.linkedin.com/in/batu-ta%C5%9Fkesen-502a0928a/) • [Behance](https://www.behance.net/batutakesen)
