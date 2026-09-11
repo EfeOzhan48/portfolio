@@ -79,13 +79,6 @@ Iterative packaging tests were conducted to balance internal component clearance
 * 🌿 **Muted Moss / Khaki:** `HEX: #4F5846` | `Pantone 7771 C`
 
 ---
-### CMF Color Palette (Pantone & HEX)
-* 🌾 **Dried Pampas:** `HEX: #D4CFBC` | `Pantone 4545 C`
-* 🏺 **Raw Ochre / Mustard:** `HEX: #BA8E4E` | `Pantone 7556 C`
-* 🧱 **Raw Terracotta:** `HEX: #B55A44` | `Pantone 7592 C`
-* 🌿 **Muted Moss / Khaki:** `HEX: #4F5846` | `Pantone 7771 C`
-
----
 
 <iframe 
   class="w-full aspect-video rounded-xl my-6 border border-skin-line shadow-md"
