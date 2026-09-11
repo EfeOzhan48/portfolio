@@ -80,17 +80,7 @@ Iterative packaging tests were conducted to balance internal component clearance
 
 ---
 
-<video 
-  controls 
-  autoplay 
-  loop 
-  muted 
-  playsinline 
-  class="w-full rounded-xl my-6 border border-skin-line shadow-md"
->
-  <source src="/projects/smartpot-presentation.mp4" type="video/mp4" />
-  Your browser does not support the video tag.
-</video>
+<video src="/projects/smartpot-presentation.mp4" controls autoplay loop muted playsinline class="w-full rounded-xl my-6 border border-skin-line shadow-md"></video>
 
 ## 5. Open-Source Community Vision & Future Roadmap (DIY / Maker)
 
