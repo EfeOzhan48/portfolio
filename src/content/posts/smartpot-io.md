@@ -101,8 +101,6 @@ Iterative packaging tests were conducted to balance internal component clearance
 
 ## 5. Open-Source Community Vision & Future Roadmap (DIY / Maker)
 
-## 5. Open-Source Community Vision & Future Roadmap (DIY / Maker)
-
 SmartPot-IO is planned as a fully open-source hardware and software ecosystem.
 
 * **Fabricate Your Own Planter:** The goal is to allow anyone to download the CAD/STL models, 3D print the enclosure locally or via desktop 3D printers, source off-the-shelf electronics, and assemble their own custom planter.
