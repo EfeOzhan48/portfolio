@@ -79,6 +79,17 @@ Iterative packaging tests were conducted to balance internal component clearance
 * 🌿 **Muted Moss / Khaki:** `HEX: #4F5846` | `Pantone 7771 C`[cite: 1]
 
 ---
+<video 
+  controls 
+  autoplay 
+  loop 
+  muted 
+  playsinline 
+  class="w-full rounded-xl my-6 border border-skin-line shadow-md"
+>
+  <source src="/projects/smartpot-presentation.mp4" type="video/mp4" />
+  Your browser does not support the video tag.
+</video>
 
 ## 5. Open-Source Community Vision & Future Roadmap (DIY / Maker)
 
