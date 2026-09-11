@@ -79,8 +79,24 @@ Iterative packaging tests were conducted to balance internal component clearance
 * 🌿 **Muted Moss / Khaki:** `HEX: #4F5846` | `Pantone 7771 C`
 
 ---
+### CMF Color Palette (Pantone & HEX)
+* 🌾 **Dried Pampas:** `HEX: #D4CFBC` | `Pantone 4545 C`
+* 🏺 **Raw Ochre / Mustard:** `HEX: #BA8E4E` | `Pantone 7556 C`
+* 🧱 **Raw Terracotta:** `HEX: #B55A44` | `Pantone 7592 C`
+* 🌿 **Muted Moss / Khaki:** `HEX: #4F5846` | `Pantone 7771 C`
 
-<video src="/projects/smartpot-presentation.mp4" controls autoplay loop muted playsinline class="w-full rounded-xl my-6 border border-skin-line shadow-md"></video>
+---
+
+<iframe 
+  class="w-full aspect-video rounded-xl my-6 border border-skin-line shadow-md"
+  src="https://www.youtube.com/embed/OI0_9ePeNNs" 
+  title="SmartPot-IO Presentation Showcase" 
+  frameborder="0" 
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+  allowfullscreen>
+</iframe>
+
+## 5. Open-Source Community Vision & Future Roadmap (DIY / Maker)
 
 ## 5. Open-Source Community Vision & Future Roadmap (DIY / Maker)
 
