@@ -96,6 +96,15 @@ Iterative packaging tests were conducted to balance internal component clearance
   allowfullscreen>
 </iframe>
 
+> 📑 **Interactive Presentation Deck:**  
+> [📥 Click here to open/download the full SmartPot-IO Design & Engineering Deck (PDF)](/projects/smartpot-io-presentation.pdf)
+
+<iframe 
+  src="/projects/smartpot-io-presentation.pdf" 
+  class="w-full h-[550px] rounded-xl my-4 border border-skin-line shadow-md"
+  type="application/pdf">
+</iframe>
+
 ## 5. Open-Source Community Vision & Future Roadmap (DIY / Maker)
 
 ## 5. Open-Source Community Vision & Future Roadmap (DIY / Maker)
