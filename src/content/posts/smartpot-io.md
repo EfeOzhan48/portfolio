@@ -73,12 +73,13 @@ Iterative packaging tests were conducted to balance internal component clearance
 ![SmartPot Prototype 6](/projects/proto-6.jpeg)
 
 ### CMF Color Palette (Pantone & HEX)
-* 🌾 **Dried Pampas:** `HEX: #D4CFBC` | `Pantone 4545 C`[cite: 1]
-* 🏺 **Raw Ochre / Mustard:** `HEX: #BA8E4E` | `Pantone 7556 C`[cite: 1]
-* 🧱 **Raw Terracotta:** `HEX: #B55A44` | `Pantone 7592 C`[cite: 1]
-* 🌿 **Muted Moss / Khaki:** `HEX: #4F5846` | `Pantone 7771 C`[cite: 1]
+* 🌾 **Dried Pampas:** `HEX: #D4CFBC` | `Pantone 4545 C`
+* 🏺 **Raw Ochre / Mustard:** `HEX: #BA8E4E` | `Pantone 7556 C`
+* 🧱 **Raw Terracotta:** `HEX: #B55A44` | `Pantone 7592 C`
+* 🌿 **Muted Moss / Khaki:** `HEX: #4F5846` | `Pantone 7771 C`
 
 ---
+
 <video 
   controls 
   autoplay 
