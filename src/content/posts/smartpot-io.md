@@ -36,7 +36,7 @@ The earliest iteration was designed to broadcast an access point or connect to a
 * **Why Local IP?** To completely avoid recurring domain and cloud hosting fees, minimize third-party backend dependencies, and eliminate setup friction.
 * **Browser Interface Screenshot:**
 
-![SmartPot Initial HTML Browser UI](/assets/projects/smartpot/smartpot-io_arayuz.png)
+![SmartPot Initial HTML Browser UI](/assets/projects/smartpot-io_arayüz.png)
 *(Browser view of the initial HTML dashboard)*
 
 * **The Challenge:** While cost-effective, opening a browser and navigating to a local IP (`192.168.x.x`) created unnecessary friction for a simple glance at plant status on a workspace desk.
@@ -66,12 +66,12 @@ Led by **Batu Taşkesen**, the enclosure design harmonizes desk ergonomics with 
 ### Early Prototyping Stages
 Iterative packaging tests were conducted to balance internal component clearance, sensor routing, and overall pot proportions:
 
-![SmartPot Prototype 1](/assets/projects/smartpot/proto-1.jpeg)
-![SmartPot Prototype 2](/assets/projects/smartpot/proto-2.jpeg)
-![SmartPot Prototype 3](/assets/projects/smartpot/proto-3.jpeg)
-![SmartPot Prototype 4](/assets/projects/smartpot/proto-4.jpeg)
-![SmartPot Prototype 5](/assets/projects/smartpot/proto-5.jpeg)
-![SmartPot Prototype 6](/assets/projects/smartpot/proto-6.jpeg)
+![SmartPot Prototype 1](/assets/projects/proto-1.jpeg)
+![SmartPot Prototype 2](/assets/projects/proto-2.jpeg)
+![SmartPot Prototype 3](/assets/projects/proto-3.jpeg)
+![SmartPot Prototype 4](/assets/projects/proto-4.jpeg)
+![SmartPot Prototype 5](/assets/projects/proto-5.jpeg)
+![SmartPot Prototype 6](/assets/projects/proto-6.jpeg)
 
 ### CMF Color Palette (Pantone & HEX)
 * 🌾 **Dried Pampas:** `HEX: #D4CFBC` | `Pantone 4545 C`[cite: 1]
@@ -95,5 +95,5 @@ SmartPot-IO is planned as a fully open-source hardware and software ecosystem.
 
 * 🐙 **Source Code:** [GitHub - SmartPot-IO](https://github.com/EfeOzhan48/SmartPot-IO)
 * ⚡ **Live Circuit Simulation:** [Run on Wokwi](https://wokwi.com/projects/473148814433475585)
-* 👤 **Durmuş Efe Özhan:** [efeozhan.dev](https://www.efeozhan.dev) • [LinkedIn](https://www.linkedin.com/in/durmu%C5%9F-efe-%C3%B6zhan-720a46325/)[cite: 1]
+* 👤 **Durmuş Efe Özhan:** [efeozhan.dev](https://www.efeozhan.dev) • [LinkedIn](https://www.linkedin.com/in/durmu%C5%9F-efe-%C3%B6zhan-720a46325/)
 * 🎨 **Batu Taşkesen:** [LinkedIn](https://www.linkedin.com/in/batu-ta%C5%9Fkesen-502a0928a/) • [Behance](https://www.behance.net/batutakesen)
