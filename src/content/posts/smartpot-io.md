@@ -36,8 +36,7 @@ The earliest iteration was designed to broadcast an access point or connect to a
 * **Why Local IP?** To completely avoid recurring domain and cloud hosting fees, minimize third-party backend dependencies, and eliminate setup friction.
 * **Browser Interface Screenshot:**
 
-![SmartPot Initial HTML Browser UI](/assets/projects/smartpot-io_arayüz.png)
-*(Browser view of the initial HTML dashboard)*
+![SmartPot Initial HTML Browser UI](/projects/smartpot-io_arayuz.png)
 
 * **The Challenge:** While cost-effective, opening a browser and navigating to a local IP (`192.168.x.x`) created unnecessary friction for a simple glance at plant status on a workspace desk.
 
@@ -66,12 +65,12 @@ Led by **Batu Taşkesen**, the enclosure design harmonizes desk ergonomics with 
 ### Early Prototyping Stages
 Iterative packaging tests were conducted to balance internal component clearance, sensor routing, and overall pot proportions:
 
-![SmartPot Prototype 1](/assets/projects/proto-1.jpeg)
-![SmartPot Prototype 2](/assets/projects/proto-2.jpeg)
-![SmartPot Prototype 3](/assets/projects/proto-3.jpeg)
-![SmartPot Prototype 4](/assets/projects/proto-4.jpeg)
-![SmartPot Prototype 5](/assets/projects/proto-5.jpeg)
-![SmartPot Prototype 6](/assets/projects/proto-6.jpeg)
+![SmartPot Prototype 1](/projects/proto-1.jpeg)
+![SmartPot Prototype 2](/projects/proto-2.jpeg)
+![SmartPot Prototype 3](/projects/proto-3.jpeg)
+![SmartPot Prototype 4](/projects/proto-4.jpeg)
+![SmartPot Prototype 5](/projects/proto-5.jpeg)
+![SmartPot Prototype 6](/projects/proto-6.jpeg)
 
 ### CMF Color Palette (Pantone & HEX)
 * 🌾 **Dried Pampas:** `HEX: #D4CFBC` | `Pantone 4545 C`[cite: 1]
