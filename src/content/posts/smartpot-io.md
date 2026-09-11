@@ -1,6 +1,6 @@
 ---
 title: "SmartPot-IO: Interdisciplinary Smart Planter & CMF Design Case Study"
-author: "Durmuş Efe Özhan & Batu Taşkesen"
+author: "Batu Taşkesen"
 description: "An autonomous, battery-powered smart planter integrating capacitive soil sensing, real-time OLED telemetry, adaptive sleep cycles, and custom ergonomic CMF enclosure design."
 pubDatetime: 2026-08-26T20:30:00Z
 draft: false
